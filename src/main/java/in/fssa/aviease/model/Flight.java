@@ -1,0 +1,33 @@
+package in.fssa.aviease.model;
+
+import java.sql.Time;
+
+public class Flight extends FlightEntity{
+	
+    
+	public Flight(int id,String src,String destination,String airLinecode,String flightNo,int dayId,boolean flightStatus,Time flighttime,int noOfSeats) {
+		
+		super.setId(id);
+		super.setSrc(src);
+		super.setDestination(destination);
+		super.setAirlineCode(airLinecode);
+		super.setFlightNo(flightNo);
+		super.setFlightNo(flightNo);
+		super.setDayId(dayId);
+		super.setFlightStatus(flightStatus);
+		super.setFlightTime(flighttime);
+		super.setNoOfSeats(noOfSeats);
+		
+		
+	}
+
+	public Flight() {
+		
+	}
+
+	
+
+
+	
+
+}

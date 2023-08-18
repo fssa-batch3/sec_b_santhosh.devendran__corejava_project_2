@@ -1,13 +1,17 @@
-CREATE DATABASE IF NOT EXISTS flight_booking;
+use aviease;
 
 CREATE TABLE IF NOT exists users (
     id INT NOT NULL AUTO_INCREMENT,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
-    mobile_number VARCHAR(20) NOT NULL,
+    mobile_number long NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(20) NOT NULL,
     PRIMARY KEY (id)
 );
+
+drop table users;
+
 
 
 CREATE TABLE IF NOT exists airline (
@@ -68,10 +72,10 @@ CREATE TABLE IF NOT exists tickets (
 );
 
 
-INSERT INTO users (first_name, last_name, mobile_number, email)
+INSERT INTO users (first_name, last_name, mobile_number, email,password)
 VALUES
-    ('John', 'Doe', '1234567890', 'john.doe@example.com'),
-    ('Jane', 'Smith', '9876543210', 'jane.smith@example.com');
+    ('John', 'Doe', '1234567890', 'john.doe@example.com','gfdhwf5'),
+    ('Jane', 'Smith', '9876543210', 'jane.smith@example.com','dfgjhgdfwjg');
 
 INSERT INTO airline (airline_name, airline_code)
 VALUES
@@ -100,4 +104,4 @@ VALUES
     (1, 1, 1, '2023-08-20'),
     (2, 2, 2, '2023-09-05');
     
-    select* from airline;
+    select* from users;

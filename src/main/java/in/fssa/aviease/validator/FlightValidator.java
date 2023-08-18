@@ -1,0 +1,116 @@
+package in.fssa.aviease.validator;
+
+import java.sql.Time;
+import java.time.format.DateTimeFormatter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import in.fssa.aviease.exception.ValidationException;
+import in.fssa.aviease.model.Flight;
+import in.fssa.aviease.dao.FlightDAO;
+//import in.fssa.aviease.dao.AirlineDAO;
+import in.fssa.aviease.util.StringUtil;
+
+public class FlightValidator {
+
+	public static void validateFlight(Flight flight) throws ValidationException {
+
+		StringUtil.rejectIfInvalidString(flight.getSrc(), "source");
+		StringUtil.rejectIfInvalidString(flight.getDestination(), "destination");
+		StringUtil.rejectIfInvalidString(flight.getAirlineCode(), "airline code");
+		StringUtil.rejectIfInvalidString(flight.getFlightNo(), "flight number");
+		validateInt(flight.getNoOfSeats(), "seats");
+		isValidSqlTimeFormat(flight.getFlightTime());
+		flightNoNotExist(flight.getFlightNo());
+		
+	}
+
+	public static void validateInt(int in, String inName) throws ValidationException {
+
+		if (in < 1) {
+
+			throw new ValidationException(inName.concat("can not be 0 or negative"));
+		}
+	}
+	
+	public static void validateString(String in, String inName) throws ValidationException {
+
+		StringUtil.rejectIfInvalidString(in, inName);
+	}
+
+	public static void isValidSqlTimeFormat(Time time) throws ValidationException {
+
+		String timePattern = "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$";
+
+		DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
+		String timeString = timeFormat.format(time.toLocalTime());
+
+		Pattern pattern = Pattern.compile(timePattern);
+		Matcher matcher = pattern.matcher(timeString);
+
+		if (!matcher.matches()) {
+			throw new ValidationException("Invalid time format");
+		}
+	}
+
+	public static void flightNoNotExist(String flightNo) throws ValidationException {
+
+		FlightDAO fdao = new FlightDAO();
+		Flight check = new Flight();
+
+		check = fdao.findByFlightNo(flightNo);
+
+		if (check != null) {
+			throw new ValidationException("flight already exist");
+
+		}
+
+	}
+	
+	public static void flightNoExist(String flightNo) throws ValidationException {
+
+		FlightDAO fdao = new FlightDAO();
+		Flight check = new Flight();
+
+		check = fdao.findByFlightNo(flightNo);
+
+		if (check == null) {
+			throw new ValidationException("flight not exist");
+
+		}
+
+	}
+	
+
+	public static void flightIdExist(int flightId) throws ValidationException {
+
+		FlightDAO fdao = new FlightDAO();
+		Flight check = new Flight();
+
+		check = fdao.findById(flightId);
+
+		if (check == null) {
+			throw new ValidationException("flight already not exist");
+
+		}
+
+	}
+	
+//	public static void flightAirLineIdExist(String airlineId) throws ValidationException {
+//
+//		AirlineDAO fdao = new AirlineDAO();
+//		Airline check = new Airline();
+//
+//		check = fdao.findByAirLineCode(airlineId);
+//
+//		if (check == null) {
+//			throw new ValidationException("flight already not exist");
+//
+//		}
+//
+//	}
+//	
+//	
+	
+
+}
