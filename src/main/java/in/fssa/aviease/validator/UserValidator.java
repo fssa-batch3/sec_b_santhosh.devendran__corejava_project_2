@@ -12,7 +12,12 @@ import in.fssa.aviease.util.StringUtil;
 public class UserValidator {
 	
 	
-	
+	 /**
+     * Validates the provided User object.
+     *
+     * @param newUser The User object to be validated.
+     * @throws ValidationException If validation of the user fails.
+     */
 	public static void validate(User newUser) throws ValidationException {
 		if (newUser == null) {
 			throw new ValidationException("invalid user input");
@@ -23,13 +28,24 @@ public class UserValidator {
 		StringUtil.rejectIfInvalidString(newUser.getLastname(), "Lastname");
 	}
 	
-	
+	/**
+     * Validates a string value.
+     *
+     * @param input The string value to be validated.
+     * @param inputName The name of the string value for error messages.
+     * @throws ValidationException If validation of the string value fails.
+     */
 	public static void stringValidate(String input,String inputName) throws ValidationException {
 		StringUtil.rejectIfInvalidString(input, inputName);
 	
 	}
 	
-	
+	 /**
+     * Validates the non-existence of a user with the given email.
+     *
+     * @param email The email to be validated.
+     * @throws ValidationException If a user with the given email already exists.
+     */
 	public static void checkNotExistEmail(String email) throws ValidationException {
 		UserDAO userdao = new UserDAO();
 		User user = new User();
@@ -42,6 +58,12 @@ public class UserValidator {
 	
 	}
 	
+	/**
+     * Validates the non-existence of a user with the given mobile number.
+     *
+     * @param mobile The mobile number to be validated.
+     * @throws ValidationException If a user with the given mobile number already exists.
+     */
 	public static void checkNotExistMobileNo(long mobile) throws ValidationException {
 		UserDAO userdao = new UserDAO();
 		User user = new User();
@@ -54,6 +76,12 @@ public class UserValidator {
 		
 	}
 	
+	 /**
+     * Validates the existence of a user with the given email.
+     *
+     * @param email The email to be validated.
+     * @throws ValidationException If a user with the given email does not exist.
+     */
 	public static void checkExistEmail(String email) throws ValidationException {
 		UserDAO userdao = new UserDAO();
 		User user = new User();
@@ -66,7 +94,12 @@ public class UserValidator {
 		
 	}
 	
-	
+	 /**
+     * Validates the existence of a user with the given mobile number.
+     *
+     * @param mobile The mobile number to be validated.
+     * @throws ValidationException If a user with the given mobile number does not exist.
+     */
 	public static void checkExistMobileNo(long mobile) throws ValidationException {
 		UserDAO userdao = new UserDAO();
 		User user = new User();
@@ -79,6 +112,12 @@ public class UserValidator {
 		
 	}
 	
+	/**
+     * Validates the existence of a user with the given ID.
+     *
+     * @param id The ID to be validated.
+     * @throws ValidationException If a user with the given ID does not exist.
+     */
 	public static void checkExistid(int id) throws ValidationException {
 		UserDAO userdao = new UserDAO();
 		User user = new User();
@@ -91,6 +130,12 @@ public class UserValidator {
 		
 	}
 
+	 /**
+     * Validates the format of an email.
+     *
+     * @param email The email to be validated.
+     * @throws ValidationException If validation of the email format fails.
+     */
 	public static void emailValidate(String email) throws ValidationException {
 		
 		StringUtil.rejectIfInvalidString(email, "Email");
@@ -105,7 +150,12 @@ public class UserValidator {
 
 	}
 	
-	
+	/**
+     * Validates the format of a password.
+     *
+     * @param password The password to be validated.
+     * @throws ValidationException If validation of the password format fails.
+     */
 	  public static void passwordValidate(String password) throws ValidationException {
 	        StringUtil.rejectIfInvalidString(password, "Password");
 
@@ -118,6 +168,12 @@ public class UserValidator {
 	        }
 	    }
 
+	  /**
+	     * Validates an integer ID.
+	     *
+	     * @param id The ID to be validated.
+	     * @throws ValidationException If validation of the ID fails.
+	     */
 	public static void idValidate(int id) throws ValidationException {
 
 		if(id<1) {
@@ -127,6 +183,12 @@ public class UserValidator {
 
 	}
 
+	/**
+     * Validates a mobile number.
+     *
+     * @param mobile The mobile number to be validated.
+     * @throws ValidationException If validation of the mobile number fails.
+     */
 	public static void mobileNoValidate(long mobile) throws ValidationException {
 
 		StringUtil.rejectIfInvalidMobileNo(mobile);

@@ -80,6 +80,9 @@ public class App {
        flight.setFlightTimeString(timeStr);
        flight.setNoOfSeats(330);
        
+       System.out.println(flight.toString());
+       
+       
        //create
 //       try {
 //		fs.create(flight);
@@ -90,12 +93,12 @@ public class App {
        
        //update
        
-       try {
-		fs.update(6, flight);
-	} catch (ValidationException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+//       try {
+//		fs.update(6, flight);
+//	} catch (ValidationException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	}
        
        
 		

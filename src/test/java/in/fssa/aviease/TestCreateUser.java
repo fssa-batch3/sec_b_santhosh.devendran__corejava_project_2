@@ -22,8 +22,8 @@ public class TestCreateUser {
 	        User newUser = new User();
 	        newUser.setFirstname("Santhosh");
 	        newUser.setLastname("Devendren");
-	        newUser.setMobileNo(7865489395l);
-	        newUser.setEmail("sandy1@gmail.com");
+	        newUser.setMobileNo(7865489399l);
+	        newUser.setEmail("sandy12@gmail.com");
 	        newUser.setPassword("Azxcv@123");
 
 	        assertDoesNotThrow(() -> {
@@ -66,13 +66,15 @@ public class TestCreateUser {
 	        	User newUser = new User();
 		        newUser.setFirstname("sandy");
 		        newUser.setLastname("Devendren");
-		        newUser.setMobileNo(5925054118l);
-		        newUser.setEmail("sandy1@gmail.com");
+		        newUser.setMobileNo(4925054128l);
+		        newUser.setEmail("sand@gmail.com");
 		        newUser.setPassword("Azxcv@123");
 	            userService.create(newUser);
 	        });
 	        String expectedMessage = "invalid mobile number";
+	      
 	        String actualMessage = exception.getMessage();
+	       
 	        assertTrue(expectedMessage.equals(actualMessage));
 	    }
 	    
@@ -84,7 +86,7 @@ public class TestCreateUser {
 		        newUser.setFirstname("sandy");
 		        newUser.setLastname("Devendren");
 		        newUser.setMobileNo(8925054118l);
-		        newUser.setEmail("sandy1@gmail.com");
+		        newUser.setEmail("sandy@gmail.com");
 		        newUser.setPassword("Azxcv@123");
 	            userService.create(newUser);
 	        });
@@ -101,7 +103,7 @@ public class TestCreateUser {
 		        newUser.setFirstname(null);
 		        newUser.setLastname("Devendren");
 		        newUser.setMobileNo(7865489395l);
-		        newUser.setEmail("sandy1@gmail.com");
+		        newUser.setEmail("sandy156@gmail.com");
 		        newUser.setPassword("Azxcv@123");
 	            userService.create(newUser);
 	        });
@@ -117,7 +119,7 @@ public class TestCreateUser {
 		        newUser.setFirstname("Santhosh");
 		        newUser.setLastname("");
 		        newUser.setMobileNo(7865489395l);
-		        newUser.setEmail("sandy1@gmail.com");
+		        newUser.setEmail("sandy187@gmail.com");
 		        newUser.setPassword("Azxcv@123");
 	            userService.create(newUser);
 	        });
@@ -134,7 +136,7 @@ public class TestCreateUser {
 		        newUser.setFirstname("Santhosh");
 		        newUser.setLastname(null);
 		        newUser.setMobileNo(7865489395l);
-		        newUser.setEmail("sandy1@gmail.com");
+		        newUser.setEmail("sandy981@gmail.com");
 		        newUser.setPassword("Azxcv@123");
 	            userService.create(newUser);
 	        });
