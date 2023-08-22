@@ -17,10 +17,6 @@ public interface FlightInterface extends Base<Flight> {
 	
 	public abstract List<Flight> findAllBySourcAndDestinationAndtime(String src,String des,String time) throws ValidationException;
 	
-	
-	
-	
-		
-	
+
 
 }

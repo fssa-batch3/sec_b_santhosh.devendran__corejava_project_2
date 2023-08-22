@@ -190,8 +190,10 @@ public class UserValidator {
      * @throws ValidationException If validation of the mobile number fails.
      */
 	public static void mobileNoValidate(long mobile) throws ValidationException {
-
-		StringUtil.rejectIfInvalidMobileNo(mobile);
+		
+		if(mobile < 6000000001l || mobile > 9999999999l) {
+			throw new ValidationException("invalid mobile number");
+		}
 
 	}
 

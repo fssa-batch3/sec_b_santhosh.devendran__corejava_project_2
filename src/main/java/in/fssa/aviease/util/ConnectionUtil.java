@@ -11,6 +11,12 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class ConnectionUtil {
 
 	
+	  /**
+     * Establishes a database connection using environment variables.
+     *
+     * @return A Connection object representing the database connection.
+     * @throws RuntimeException If connection setup or configuration fails.
+     */
 	public static Connection getConnection() {
 		
 		Dotenv env = Dotenv.load();
@@ -39,6 +45,13 @@ public class ConnectionUtil {
 		return connection;
 
 	}
+	
+	  /**
+     * Closes the database connection and PreparedStatement.
+     *
+     * @param connection The Connection object to be closed.
+     * @param ps The PreparedStatement object to be closed.
+     */
 
 	public static void close(Connection connection, PreparedStatement ps) {
 
@@ -56,6 +69,13 @@ public class ConnectionUtil {
 
 	}
 
+	 /**
+     * Closes the database connection, PreparedStatement, and ResultSet.
+     *
+     * @param connection The Connection object to be closed.
+     * @param ps The PreparedStatement object to be closed.
+     * @param rs The ResultSet object to be closed.
+     */
 	public static void close(Connection connection, PreparedStatement ps, ResultSet rs) {
 
 		try {
@@ -75,5 +95,6 @@ public class ConnectionUtil {
 		}
 
 	}
+	
 
 }

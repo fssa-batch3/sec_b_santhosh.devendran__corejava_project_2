@@ -1,8 +1,12 @@
 package in.fssa.aviease;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.security.SecureRandom;
+import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,15 +19,44 @@ public class TestCreateUser {
 	
 	  
 	UserService  userService = new UserService();
+	
+	
+	
+	 private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 	    
+	    public static String generateRandomString(int length) {
+	        SecureRandom random = new SecureRandom();
+	        StringBuilder sb = new StringBuilder(length);
+	        
+	        for (int i = 0; i < length; i++) {
+	            int randomIndex = random.nextInt(CHARACTERS.length());
+	            char randomChar = CHARACTERS.charAt(randomIndex);
+	            sb.append(randomChar);
+	        }
+	        
+	        return sb.toString();
+	    }
+	    
+	    public static long generateRandomLong() {
+	         Random random = new Random();
+	        long min = 6000000000L; // 10-digit minimum value (1000000000)
+	        long max = 9999999999L; // 10-digit maximum value (9999999999)
+	        long range = max - min + 1;
+	        long randomNumber = (long) (random.nextDouble() * range) + min;
+	        return randomNumber;
+	    }
+
 
 	    @Test
 	   public void testCreateUserWithValidDataInput() {
 	        User newUser = new User();
 	        newUser.setFirstname("Santhosh");
 	        newUser.setLastname("Devendren");
-	        newUser.setMobileNo(7865489399l);
-	        newUser.setEmail("sandy12@gmail.com");
+	        long randomLong = generateRandomLong();
+	        String randomString = generateRandomString(5);
+
+	        newUser.setMobileNo(randomLong);
+	      	newUser.setEmail(randomString.concat("2@gmail.com"));
 	        newUser.setPassword("Azxcv@123");
 
 	        assertDoesNotThrow(() -> {
@@ -66,8 +99,10 @@ public class TestCreateUser {
 	        	User newUser = new User();
 		        newUser.setFirstname("sandy");
 		        newUser.setLastname("Devendren");
-		        newUser.setMobileNo(4925054128l);
-		        newUser.setEmail("sand@gmail.com");
+		        
+		        String randomString = generateRandomString(5);
+		        newUser.setMobileNo(4245054128l);
+		        newUser.setEmail(randomString.concat("@gmail.com"));
 		        newUser.setPassword("Azxcv@123");
 	            userService.create(newUser);
 	        });
@@ -78,6 +113,7 @@ public class TestCreateUser {
 	        assertTrue(expectedMessage.equals(actualMessage));
 	    }
 	    
+	   
 	    @Test
 	    public void testCreateUserWithAlreadyExistMobileNo() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
@@ -85,6 +121,7 @@ public class TestCreateUser {
 	        	User newUser = new User();
 		        newUser.setFirstname("sandy");
 		        newUser.setLastname("Devendren");
+		      
 		        newUser.setMobileNo(8925054118l);
 		        newUser.setEmail("sandy@gmail.com");
 		        newUser.setPassword("Azxcv@123");
@@ -237,9 +274,11 @@ public class TestCreateUser {
 	        	User newUser = new User();
 		        newUser.setFirstname("Santhosh");
 		        newUser.setLastname("Devendren");
-		        newUser.setMobileNo(7865489395l);
-		        newUser.setEmail("sandy1@gmail.com");
-		        newUser.setPassword("Az123766");
+		        long randomLong = generateRandomLong();
+		        String randomString = generateRandomString(5);
+		        newUser.setMobileNo(randomLong);
+		        newUser.setEmail(randomString.concat("1@gmail.com"));
+		        newUser.setPassword("A3766");
 	            userService.create(newUser);
 	        });
 	        String expectedMessage = "Invalid password format";

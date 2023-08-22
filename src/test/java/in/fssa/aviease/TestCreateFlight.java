@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Random;
+
 import org.junit.jupiter.api.Test;
 
 import in.fssa.aviease.exception.ValidationException;
@@ -13,6 +15,12 @@ import in.fssa.aviease.service.FlightService;
 public class TestCreateFlight {
 	
 	FlightService fs=new FlightService();
+	
+	 public static String generateRandom4DigitString() {
+	        Random random = new Random();
+	        int randomNumber = random.nextInt(9000) + 1000; // Generate a number between 1000 and 9999
+	        return Integer.toString(randomNumber);
+	    }
 
 	 @Test
 	   public void testCreateFlightWithValidDataInput() {
@@ -21,7 +29,8 @@ public class TestCreateFlight {
 	       flight.setSrc("chennai");
 	       flight.setDestination("delhi");
 	       flight.setAirlineCode("342");
-	       flight.setFlightNo("4267");
+	       String random4DigitString = generateRandom4DigitString();
+	       flight.setFlightNo("a".concat(random4DigitString));
 	       flight.setDayId(2);
 	       flight.setFlightStatus(true);
 	       flight.setFlightTimeString("08:30:00");
