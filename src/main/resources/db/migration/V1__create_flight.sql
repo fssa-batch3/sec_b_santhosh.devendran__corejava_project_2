@@ -1,3 +1,5 @@
+CREATE DATABASE IF NOT EXISTS aviease;
+
 use aviease;
 
 CREATE TABLE IF NOT exists users (
@@ -9,8 +11,6 @@ CREATE TABLE IF NOT exists users (
     password VARCHAR(20) NOT NULL,
     PRIMARY KEY (id)
 );
-
-drop table users;
 
 
 
