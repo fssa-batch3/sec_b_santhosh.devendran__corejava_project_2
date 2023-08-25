@@ -1,4 +1,4 @@
-package in.fssa.aviease.Interface;
+package in.fssa.aviease.interfaces;
 
 import java.util.List;
 

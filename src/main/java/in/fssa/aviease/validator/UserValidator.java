@@ -2,6 +2,7 @@ package in.fssa.aviease.validator;
 
 import java.util.regex.Matcher;
 
+
 import java.util.regex.Pattern;
 
 import in.fssa.aviease.dao.UserDAO;
@@ -47,10 +48,10 @@ public class UserValidator {
      * @throws ValidationException If a user with the given email already exists.
      */
 	public static void checkNotExistEmail(String email) throws ValidationException {
-		UserDAO userdao = new UserDAO();
+		UserDAO userDAO = new UserDAO();
 		User user = new User();
 		
-		user = userdao.findByEmail(email);
+		user = userDAO.findByEmail(email);
 		
 		if(user != null) {
 			throw new ValidationException("email already exist");
@@ -65,10 +66,10 @@ public class UserValidator {
      * @throws ValidationException If a user with the given mobile number already exists.
      */
 	public static void checkNotExistMobileNo(long mobile) throws ValidationException {
-		UserDAO userdao = new UserDAO();
+		UserDAO userDAO = new UserDAO();
 		User user = new User();
 		
-		user = userdao.findByMobileNo(mobile);
+		user = userDAO.findByMobileNo(mobile);
 		
 		if(user != null) {
 			throw new ValidationException("mobile number already exist");
@@ -83,10 +84,10 @@ public class UserValidator {
      * @throws ValidationException If a user with the given email does not exist.
      */
 	public static void checkExistEmail(String email) throws ValidationException {
-		UserDAO userdao = new UserDAO();
+		UserDAO userDAO = new UserDAO();
 		User user = new User();
 		
-		user = userdao.findByEmail(email);
+		user = userDAO.findByEmail(email);
 		
 		if(user == null) {
 			throw new ValidationException("user not found");
@@ -101,10 +102,10 @@ public class UserValidator {
      * @throws ValidationException If a user with the given mobile number does not exist.
      */
 	public static void checkExistMobileNo(long mobile) throws ValidationException {
-		UserDAO userdao = new UserDAO();
+		UserDAO userDAO = new UserDAO();
 		User user = new User();
 		
-		user = userdao.findByMobileNo(mobile);
+		user = userDAO.findByMobileNo(mobile);
 		
 		if(user == null) {
 			throw new ValidationException("user not found");
@@ -119,10 +120,10 @@ public class UserValidator {
      * @throws ValidationException If a user with the given ID does not exist.
      */
 	public static void checkExistid(int id) throws ValidationException {
-		UserDAO userdao = new UserDAO();
+		UserDAO userDAO = new UserDAO();
 		User user = new User();
 		
-		user = userdao.findById(id);
+		user = userDAO.findById(id);
 		
 		if(user == null) {
 			throw new ValidationException("user not found");

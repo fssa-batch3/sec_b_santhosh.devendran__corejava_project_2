@@ -14,7 +14,7 @@ import in.fssa.aviease.service.FlightService;
 
 public class TestCreateFlight {
 	
-	FlightService fs=new FlightService();
+	FlightService flightService=new FlightService();
 	
 	 public static String generateRandom4DigitString() {
 	        Random random = new Random();
@@ -38,7 +38,7 @@ public class TestCreateFlight {
 	       
 
 	        assertDoesNotThrow(() -> {
-	        	fs.create(flight);
+	        	flightService.createFlight(flight);
 	        });
 	    }
 
@@ -46,7 +46,7 @@ public class TestCreateFlight {
 	    public void testCreateFlightWithInvalidData() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	
-	            fs.create(null);
+	            flightService.createFlight(null);
 	        });
 	        String expectedMessage = "flight can not be null";
 	        String actualMessage = exception.getMessage();
@@ -67,7 +67,7 @@ public class TestCreateFlight {
 	 	       flight.setFlightTimeString("08:30:00");
 	 	       flight.setNoOfSeats(330);
 	 	       
-	 	       fs.create(flight);
+	 	       flightService.createFlight(flight);
 	        });
 	        String expectedMessage = "source cannot be Null or Empty";
 	        String actualMessage = exception.getMessage();
@@ -88,7 +88,7 @@ public class TestCreateFlight {
 	 	       flight.setFlightTimeString("08:30:00");
 	 	       flight.setNoOfSeats(330);
 	 	       
-	 	       fs.create(flight);
+	 	       flightService.createFlight(flight);
 	        });
 	        String expectedMessage = "source cannot be Null or Empty";
 	        String actualMessage = exception.getMessage();
@@ -109,7 +109,7 @@ public class TestCreateFlight {
 	 	       flight.setFlightTimeString("08:30:00");
 	 	       flight.setNoOfSeats(330);
 	 	       
-	 	       fs.create(flight);
+	 	       flightService.createFlight(flight);
 	        });
 	        String expectedMessage = "destination cannot be Null or Empty";
 	        String actualMessage = exception.getMessage();
@@ -130,7 +130,7 @@ public class TestCreateFlight {
 	 	       flight.setFlightTimeString("08:30:00");
 	 	       flight.setNoOfSeats(330);
 	 	       
-	 	       fs.create(flight);
+	 	       flightService.createFlight(flight);
 	        });
 	        String expectedMessage = "destination cannot be Null or Empty";
 	        String actualMessage = exception.getMessage();
@@ -151,7 +151,7 @@ public class TestCreateFlight {
 	 	       flight.setFlightTimeString("08:30:00");
 	 	       flight.setNoOfSeats(330);
 	 	       
-	 	       fs.create(flight);
+	 	       flightService.createFlight(flight);
 	        });
 	        String expectedMessage = "airline code cannot be Null or Empty";
 	        String actualMessage = exception.getMessage();
@@ -172,7 +172,7 @@ public class TestCreateFlight {
 	 	       flight.setFlightTimeString("08:30:00");
 	 	       flight.setNoOfSeats(330);
 	 	       
-	 	       fs.create(flight);
+	 	       flightService.createFlight(flight);
 	        });
 	        String expectedMessage = "airline code cannot be Null or Empty";
 	        String actualMessage = exception.getMessage();
@@ -194,7 +194,7 @@ public class TestCreateFlight {
 	 	       flight.setFlightTimeString("08:30:00");
 	 	       flight.setNoOfSeats(330);
 	 	       
-	 	       fs.create(flight);
+	 	       flightService.createFlight(flight);
 	        });
 	        String expectedMessage = "flight number cannot be Null or Empty";
 	        String actualMessage = exception.getMessage();
@@ -215,7 +215,7 @@ public class TestCreateFlight {
 	 	       flight.setFlightTimeString("08:30:00");
 	 	       flight.setNoOfSeats(330);
 	 	       
-	 	       fs.create(flight);
+	 	       flightService.createFlight(flight);
 	        });
 	        String expectedMessage = "flight number cannot be Null or Empty";
 	        String actualMessage = exception.getMessage();

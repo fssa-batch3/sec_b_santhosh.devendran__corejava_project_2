@@ -11,7 +11,7 @@ import in.fssa.aviease.service.FlightService;
 
 public class TestUpdateFlight {
 
-	FlightService fs=new FlightService();
+	FlightService flightService=new FlightService();
 	 @Test
 	    public void testCreateFlightWithInvalidid() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
@@ -26,7 +26,7 @@ public class TestUpdateFlight {
 	 	       flight.setFlightTimeString("08:30:00");
 	 	       flight.setNoOfSeats(330);
 	 	       
-	 	       fs.update(82,flight);
+	 	      flightService.updateFlight(82,flight);
 	        });
 	        String expectedMessage = "flight already not exist";
 	        String actualMessage = exception.getMessage();

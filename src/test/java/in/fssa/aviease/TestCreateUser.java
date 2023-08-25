@@ -27,15 +27,15 @@ public class TestCreateUser {
 	    
 	    public static String generateRandomString(int length) {
 	        SecureRandom random = new SecureRandom();
-	        StringBuilder sb = new StringBuilder(length);
+	        StringBuilder stringBuilder = new StringBuilder(length);
 	        
 	        for (int i = 0; i < length; i++) {
 	            int randomIndex = random.nextInt(CHARACTERS.length());
 	            char randomChar = CHARACTERS.charAt(randomIndex);
-	            sb.append(randomChar);
+	            stringBuilder.append(randomChar);
 	        }
 	        
-	        return sb.toString();
+	        return stringBuilder.toString();
 	    }
 	    
 	    public static long generateRandomLong() {
@@ -61,7 +61,7 @@ public class TestCreateUser {
 	        newUser.setPassword("Azxcv@123");
 
 	        assertDoesNotThrow(() -> {
-	            userService.create(newUser);
+	            userService.createuser(newUser);
 	        });
 	    }
 
@@ -69,7 +69,7 @@ public class TestCreateUser {
 	    public void testCreateUserWithInvalidData() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	
-	            userService.create(null);
+	            userService.createuser(null);
 	        });
 	        String expectedMessage = "invalid user input";
 	        String actualMessage = exception.getMessage();
@@ -86,7 +86,7 @@ public class TestCreateUser {
 		        newUser.setMobileNo(7865489395l);
 		        newUser.setEmail("sandy1@gmail.com");
 		        newUser.setPassword("Azxcv@123");
-	            userService.create(newUser);
+	            userService.createuser(newUser);
 	        });
 	        String expectedMessage = "Firstname cannot be Null or Empty";
 	        String actualMessage = exception.getMessage();
@@ -105,7 +105,7 @@ public class TestCreateUser {
 		        newUser.setMobileNo(4245054128l);
 		        newUser.setEmail(randomString.concat("@gmail.com"));
 		        newUser.setPassword("Azxcv@123");
-	            userService.create(newUser);
+	            userService.createuser(newUser);
 	        });
 	        String expectedMessage = "invalid mobile number";
 	      
@@ -126,7 +126,7 @@ public class TestCreateUser {
 		        newUser.setMobileNo(8925054118l);
 		        newUser.setEmail("sandy@gmail.com");
 		        newUser.setPassword("Azxcv@123");
-	            userService.create(newUser);
+	            userService.createuser(newUser);
 	        });
 	        String expectedMessage = "mobile number already exist";
 	        String actualMessage = exception.getMessage();
@@ -143,7 +143,7 @@ public class TestCreateUser {
 		        newUser.setMobileNo(7865489395l);
 		        newUser.setEmail("sandy156@gmail.com");
 		        newUser.setPassword("Azxcv@123");
-	            userService.create(newUser);
+	            userService.createuser(newUser);
 	        });
 	        String expectedMessage = "Firstname cannot be Null or Empty";
 	        String actualMessage = exception.getMessage();
@@ -159,7 +159,7 @@ public class TestCreateUser {
 		        newUser.setMobileNo(7865489395l);
 		        newUser.setEmail("sandy187@gmail.com");
 		        newUser.setPassword("Azxcv@123");
-	            userService.create(newUser);
+	            userService.createuser(newUser);
 	        });
 	        String expectedMessage = "Lastname cannot be Null or Empty";
 	        String actualMessage = exception.getMessage();
@@ -176,7 +176,7 @@ public class TestCreateUser {
 		        newUser.setMobileNo(7865489395l);
 		        newUser.setEmail("sandy981@gmail.com");
 		        newUser.setPassword("Azxcv@123");
-	            userService.create(newUser);
+	            userService.createuser(newUser);
 	        });
 	        String expectedMessage = "Lastname cannot be Null or Empty";
 	        String actualMessage = exception.getMessage();
@@ -193,7 +193,7 @@ public class TestCreateUser {
 		        newUser.setMobileNo(7865489395l);
 		        newUser.setEmail("");
 		        newUser.setPassword("Azxcv@123");
-	            userService.create(newUser);
+	            userService.createuser(newUser);
 	        });
 	        String expectedMessage = "Email cannot be Null or Empty";
 	        String actualMessage = exception.getMessage();
@@ -210,7 +210,7 @@ public class TestCreateUser {
 		        newUser.setMobileNo(7865489395l);
 		        newUser.setEmail(null);
 		        newUser.setPassword("Azxcv@123");
-	            userService.create(newUser);
+	            userService.createuser(newUser);
 	        });
 	        String expectedMessage = "Email cannot be Null or Empty";
 	        String actualMessage = exception.getMessage();
@@ -227,7 +227,7 @@ public class TestCreateUser {
 		        newUser.setMobileNo(7865489395l);
 		        newUser.setEmail("sandy1.com");
 		        newUser.setPassword("Azxcv@123");
-	            userService.create(newUser);
+	            userService.createuser(newUser);
 	        });
 	        String expectedMessage = "Invalid email format";
 	        String actualMessage = exception.getMessage();
@@ -244,7 +244,7 @@ public class TestCreateUser {
 		        newUser.setMobileNo(7865489395l);
 		        newUser.setEmail("sandy1@gmail.com");
 		        newUser.setPassword("");
-	            userService.create(newUser);
+	            userService.createuser(newUser);
 	        });
 	        String expectedMessage = "Password cannot be Null or Empty";
 	        String actualMessage = exception.getMessage();
@@ -261,7 +261,7 @@ public class TestCreateUser {
 		        newUser.setMobileNo(7865489395l);
 		        newUser.setEmail("sandy1@gmail.com");
 		        newUser.setPassword(null);
-	            userService.create(newUser);
+	            userService.createuser(newUser);
 	        });
 	        String expectedMessage = "Password cannot be Null or Empty";
 	        String actualMessage = exception.getMessage();
@@ -280,7 +280,7 @@ public class TestCreateUser {
 		        newUser.setMobileNo(randomLong);
 		        newUser.setEmail(randomString.concat("1@gmail.com"));
 		        newUser.setPassword("A3766");
-	            userService.create(newUser);
+	            userService.createuser(newUser);
 	        });
 	        String expectedMessage = "Invalid password format";
 	        String actualMessage = exception.getMessage();

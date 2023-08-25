@@ -29,7 +29,7 @@ public class TestUpdateUser {
  	        newUser.setEmail("sandy1@gmail.com");
  	        newUser.setPassword("Azxcv@123");
         	
-            userService.update(nonExistingUserId,newUser );
+            userService.updateUser(nonExistingUserId,newUser );
         });
         String expectedMessage = "Invalid user id";
         String actualMessage = exception.getMessage();
@@ -53,7 +53,7 @@ public class TestUpdateUser {
  	        newUser.setEmail("sandy1@gmail.com");
  	        newUser.setPassword("Azxcv@123");
         	
-            userService.update(nonExistingUserId,newUser );
+            userService.updateUser(nonExistingUserId,newUser );
         });
         String expectedMessage = "user not found";
         String actualMessage = exception.getMessage();
@@ -71,7 +71,7 @@ public class TestUpdateUser {
         updatedUser.setLastname("meclearn");
 
         assertDoesNotThrow(() -> {
-            userService.update(existingUserId, updatedUser);
+            userService.updateUser(existingUserId, updatedUser);
         });
     }
 

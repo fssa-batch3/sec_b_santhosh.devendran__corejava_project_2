@@ -1,6 +1,7 @@
 package in.fssa.aviease.validator;
 
 import java.sql.Time;
+
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,7 +9,6 @@ import java.util.regex.Pattern;
 import in.fssa.aviease.exception.ValidationException;
 import in.fssa.aviease.model.Flight;
 import in.fssa.aviease.dao.FlightDAO;
-//import in.fssa.aviease.dao.AirlineDAO;
 import in.fssa.aviease.util.StringUtil;
 
 public class FlightValidator {
@@ -111,10 +111,10 @@ public class FlightValidator {
      */
 	public static void flightNoExist(String flightNo) throws ValidationException {
 
-		FlightDAO fdao = new FlightDAO();
+		FlightDAO flightDAO = new FlightDAO();
 		Flight check = new Flight();
 
-		check = fdao.findByFlightNo(flightNo);
+		check = flightDAO.findByFlightNo(flightNo);
 
 		if (check == null) {
 			throw new ValidationException("flight not exist");
@@ -131,10 +131,10 @@ public class FlightValidator {
      */
 	public static void flightIdExist(int flightId) throws ValidationException {
 
-		FlightDAO fdao = new FlightDAO();
+		FlightDAO flightDAO = new FlightDAO();
 		Flight check = new Flight();
 
-		check = fdao.findById(flightId);
+		check = flightDAO.findById(flightId);
 
 		if (check == null) {
 			throw new ValidationException("flight already not exist");

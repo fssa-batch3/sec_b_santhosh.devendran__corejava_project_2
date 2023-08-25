@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.fssa.aviease.Interface.UserInterface;
+import in.fssa.aviease.interfaces.UserInterface;
 import in.fssa.aviease.model.User;
 import in.fssa.aviease.util.ConnectionUtil;
 
@@ -22,7 +22,7 @@ public class UserDAO implements UserInterface{
 		ResultSet rs = null;
 
 		try {
-			String query = "SELECT * FROM users";
+			String query = "SELECT id, first_name, last_name, email, mobile_number, password FROM users";
 			con = ConnectionUtil.getConnection();
 			ps = con.prepareStatement(query);
 
@@ -134,7 +134,7 @@ public class UserDAO implements UserInterface{
 		ResultSet rs = null;
 
 		try {
-			String query = "SELECT * FROM users WHERE id = ? ";
+			String query = "SELECT id, first_name, last_name, email, mobile_number, password FROM users WHERE id = ?";
 			con = ConnectionUtil.getConnection();
 			ps = con.prepareStatement(query);			
 			ps.setInt(1, id);
@@ -173,7 +173,7 @@ public class UserDAO implements UserInterface{
 		User user = null;
 
 		try {
-			String query = "SELECT * FROM users  WHERE email = ? ";
+			String query = "SELECT id, first_name, last_name, email, mobile_number, password FROM users WHERE email = ?";
 			con = ConnectionUtil.getConnection();
 			ps = con.prepareStatement(query);
 			ps.setString(1, email);
@@ -209,7 +209,7 @@ public class UserDAO implements UserInterface{
 		User user = null;
 
 		try {
-			String query = "SELECT * FROM users  WHERE mobile_number = ? ";
+			String query = "SELECT id, first_name, last_name, email, mobile_number, password FROM users WHERE mobile_number = ?";
 			con = ConnectionUtil.getConnection();
 			ps = con.prepareStatement(query);
 			ps.setLong(1, mobileNo);

@@ -1,6 +1,7 @@
 package in.fssa.aviease.dao;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,9 +9,8 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.fssa.aviease.Interface.FlightInterface;
+import in.fssa.aviease.interfaces.FlightInterface;
 import in.fssa.aviease.model.Flight;
-import in.fssa.aviease.model.User;
 import in.fssa.aviease.util.ConnectionUtil;
 
 public class FlightDAO implements FlightInterface {
@@ -23,7 +23,7 @@ public class FlightDAO implements FlightInterface {
 		ResultSet rs = null;
 
 		try {
-			String query = "SELECT * FROM flight WHERE flight_status= 1 ";
+			String query = "SELECT id, src, destination, airline_code, flight_no, day_id, flight_status, flight_time, no_of_seats FROM flights WHERE flight_status = 1";
 			con = ConnectionUtil.getConnection();
 			ps = con.prepareStatement(query);
 
@@ -61,7 +61,7 @@ public class FlightDAO implements FlightInterface {
 		    PreparedStatement ps = null;
 
 		    try {
-		        String query = "INSERT INTO flight (src, destination, airline_code, flight_no, day_id, flight_status, flight_time, no_of_seats) " +
+		        String query = "INSERT INTO flights (src, destination, airline_code, flight_no, day_id, flight_status, flight_time, no_of_seats) " +
 		                       "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		        con = ConnectionUtil.getConnection();
 		        ps = con.prepareStatement(query);
@@ -95,7 +95,7 @@ public class FlightDAO implements FlightInterface {
 	    PreparedStatement ps = null;
 
 	    try {
-	        String query = "UPDATE flight SET src = ?, destination = ?, airline_code = ?, flight_no = ? ,day_id = ?, flight_status = ?, flight_time = ?, no_of_seats = ? WHERE id = ?";
+	        String query = "UPDATE flights SET src = ?, destination = ?, airline_code = ?, flight_no = ? ,day_id = ?, flight_status = ?, flight_time = ?, no_of_seats = ? WHERE id = ?";
 	        con = ConnectionUtil.getConnection();
 	        ps = con.prepareStatement(query);
 	        ps.setString(1, newFlight.getSrc());
@@ -154,7 +154,7 @@ public class FlightDAO implements FlightInterface {
 		    Flight flight = null;
 
 		    try {
-		        String query = "SELECT * FROM flight WHERE id = ?";
+		        String query = "SELECT id, src, destination, airline_code, flight_no, day_id, flight_status, flight_time, no_of_seats FROM flights WHERE id = ?";
 		        con = ConnectionUtil.getConnection();
 		        ps = con.prepareStatement(query);
 		        ps.setInt(1, id);
@@ -184,6 +184,7 @@ public class FlightDAO implements FlightInterface {
 		    return flight;
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public Flight findByFlightNo(String flightNo) {
 		  Connection con = null;
@@ -192,7 +193,7 @@ public class FlightDAO implements FlightInterface {
 		    ResultSet rs = null;
 
 		    try {
-		        String query = "SELECT * FROM flight WHERE flight_no = ? AND flight_status = 1";
+		        String query = "SELECT id, src, destination, airline_code, flight_no, day_id, flight_status, flight_time, no_of_seats FROM flights WHERE flight_no = ? AND flight_status = 1";
 		        con = ConnectionUtil.getConnection();
 		        ps = con.prepareStatement(query);
 		        ps.setString(1, flightNo);
@@ -232,7 +233,7 @@ public class FlightDAO implements FlightInterface {
 		ResultSet rs = null;
 
 		try {
-			String query = "SELECT * FROM flight WHERE airline_code=? and flight_status= 1 ";
+			String query = "SELECT id, src, destination, airline_code, flight_no, day_id, flight_status, flight_time, no_of_seats FROM flights WHERE airline_code = ? AND flight_status = 1";
 			con = ConnectionUtil.getConnection();
 			ps = con.prepareStatement(query);
 			 ps.setString(1, airLine);
@@ -272,7 +273,7 @@ public class FlightDAO implements FlightInterface {
 		    ResultSet rs = null;
 
 		    try {
-		        String query = "SELECT * FROM flight WHERE flight_status = 1 AND src = ?";
+		        String query = "SELECT id, src, destination, airline_code, flight_no, day_id, flight_status, flight_time, no_of_seats FROM flights WHERE flight_status = 1 AND src = ?";
 		        con = ConnectionUtil.getConnection();
 		        ps = con.prepareStatement(query);
 		        ps.setString(1, src);
@@ -311,7 +312,7 @@ public class FlightDAO implements FlightInterface {
 		    ResultSet rs = null;
 
 		    try {
-		        String query = "SELECT * FROM flight WHERE flight_status = 1 AND src = ? AND destination = ?";
+		        String query = "SELECT id, src, destination, airline_code, flight_no, day_id, flight_status, flight_time, no_of_seats FROM flights WHERE flight_status = 1 AND src = ? AND destination = ?";
 		        con = ConnectionUtil.getConnection();
 		        ps = con.prepareStatement(query);
 		        ps.setString(1, src);
@@ -355,7 +356,7 @@ public class FlightDAO implements FlightInterface {
 	        Time time = Time.valueOf(timeStr);
 
 		    try {
-		        String query = "SELECT * FROM flight WHERE flight_status = 1 AND src = ? AND destination = ? AND flight_time >= ?";
+		        String query = "SELECT id, src, destination, airline_code, flight_no, day_id, flight_status, flight_time, no_of_seats FROM flights WHERE flight_status = 1 AND src = ? AND destination = ? AND flight_time >= ?";
 		        con = ConnectionUtil.getConnection();
 		        ps = con.prepareStatement(query);
 		        ps.setString(1, src);

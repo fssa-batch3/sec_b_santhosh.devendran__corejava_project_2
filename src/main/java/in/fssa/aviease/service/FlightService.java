@@ -1,17 +1,19 @@
 package in.fssa.aviease.service;
 
 import java.sql.Time;
+
 import java.util.List;
 
 import in.fssa.aviease.model.Flight;
 import in.fssa.aviease.validator.FlightValidator;
-import in.fssa.aviease.Interface.FlightInterface;
 import in.fssa.aviease.dao.FlightDAO;
+import in.fssa.aviease.exception.ServiceException;
 import in.fssa.aviease.exception.ValidationException;
 
-public class FlightService implements FlightInterface{
+
+public class FlightService {
 	
-	FlightDAO flightdao = new FlightDAO();
+	FlightDAO flightDAO = new FlightDAO();
 	
 
 	/**
@@ -19,23 +21,26 @@ public class FlightService implements FlightInterface{
      *
      * @return A list of all flights.
      */
-	@Override
-	public List<Flight> findAll() {
-		return flightdao.findAll();
+	public List<Flight> findAllFlight() {
+		return flightDAO.findAll();
 	}
 
 	 /**
      * Creates a new flight.
      *
      * @param flight The flight object to be created.
+	 * @throws ServiceException 
      * @throws ValidationException If validation of the flight fails.
      */
-	@Override
-	public void create(Flight t) throws ValidationException {
+	public void createFlight(Flight t) throws ServiceException ,ValidationException{
 		
-		FlightValidator.validateFlight(t);
+		try {
+			FlightValidator.validateFlight(t);
+		} catch (ValidationException e) {
+			throw new ServiceException("flight create failed");
+		}
 		
-		flightdao.create(t);
+		flightDAO.create(t);
 		
 	}
 
@@ -44,15 +49,20 @@ public class FlightService implements FlightInterface{
      *
      * @param id The ID of the flight to be updated.
      * @param flight The updated flight object.
+	 * @throws ServiceException 
      * @throws ValidationException If validation of the ID or flight fails.
      */
-	@Override
-	public void update(int id, Flight t) throws ValidationException {
+	public void updateFlight(int id, Flight t) throws ServiceException ,ValidationException{
 		
-		FlightValidator.flightIdExist(id);
-		FlightValidator.validateFlight(t);
+		try {
+			FlightValidator.flightIdExist(id);
+			FlightValidator.validateFlight(t);
+		} catch (ValidationException e) {
+			throw new ServiceException("flight update failed");
+		}
 		
-		flightdao.update(id, t);
+		
+		flightDAO.update(id, t);
 		
 	}
 
@@ -61,13 +71,17 @@ public class FlightService implements FlightInterface{
      * Deletes a flight with the provided ID.
      *
      * @param id The ID of the flight to be deleted.
+	 * @throws ServiceException 
      * @throws ValidationException If validation of the ID fails.
      */
-	@Override
-	public void delete(int id) throws ValidationException {
+	public void deleteFlight(int id) throws ServiceException ,ValidationException {
 		
-		FlightValidator.flightIdExist(id);
-		flightdao.delete(id);
+		try {
+			FlightValidator.flightIdExist(id);
+		} catch (ValidationException e) {
+			throw new ServiceException("flight not deleted");
+		}
+		flightDAO.delete(id);
 		
 	}
 
@@ -77,13 +91,17 @@ public class FlightService implements FlightInterface{
      *
      * @param id The ID of the flight to be retrieved.
      * @return The found flight.
+	 * @throws ServiceException 
      * @throws ValidationException If validation of the ID fails.
      */
-	@Override
-	public Flight findById(int id) throws ValidationException {
+	public Flight findByFlightId(int id) throws ServiceException ,ValidationException{
 		
-		FlightValidator.flightIdExist(id);
-	return	flightdao.findById(id);
+		try {
+			FlightValidator.flightIdExist(id);
+		} catch (ValidationException e) {
+			throw new ServiceException("no flight found");
+		} 
+	return	flightDAO.findById(id);
 		
 	}
 
@@ -93,13 +111,17 @@ public class FlightService implements FlightInterface{
      *
      * @param flightNo The flight number of the flight to be retrieved.
      * @return The found flight.
+	 * @throws ServiceException 
      * @throws ValidationException If validation of the flight number fails.
      */
-	@Override
-	public Flight findByFlightNo(String flightNo) throws ValidationException {
+	public Flight findByFlightNo(String flightNo) throws ServiceException ,ValidationException{
 		
-		FlightValidator.flightNoExist(flightNo);
-		return flightdao.findByFlightNo(flightNo);
+		try {
+			FlightValidator.flightNoExist(flightNo);
+		} catch (ValidationException e) {
+			throw new ServiceException("no flight found");
+		}
+		return flightDAO.findByFlightNo(flightNo);
 	}
 
 
@@ -108,14 +130,18 @@ public class FlightService implements FlightInterface{
      *
      * @param airLine The airline code to filter flights by.
      * @return A list of flights matching the airline code.
+	 * @throws ServiceException 
      * @throws ValidationException If validation of the airline code fails.
      */
-	@Override
-	public List<Flight> findByAirLineCode(String airLine) throws ValidationException {
+	public List<Flight> findFlightByAirLineCode(String airLine) throws ServiceException,ValidationException{
 		
-		FlightValidator.validateString(airLine, "airline");
+		try {
+			FlightValidator.validateString(airLine, "airline");
+		} catch (ValidationException e) {
+			throw new ServiceException("no flight found in this air line");
+		}
 		
-		return flightdao.findByAirLineCode(airLine);
+		return flightDAO.findByAirLineCode(airLine);
 	}
 
 
@@ -124,14 +150,18 @@ public class FlightService implements FlightInterface{
      *
      * @param src The source location to filter flights by.
      * @return A list of flights departing from the source location.
+	 * @throws ServiceException 
      * @throws ValidationException If validation of the source fails.
      */
-	@Override
-	public List<Flight> findAllBySource(String src) throws ValidationException {
+	public List<Flight> findAllFlightBySource(String src) throws ServiceException ,ValidationException{
 		
-		FlightValidator.validateString(src, "source");
+		try {
+			FlightValidator.validateString(src, "source");
+		} catch (ValidationException e) {
+			throw new ServiceException("no flight available from this city");
+		}
 		
-		return flightdao.findAllBySource(src);
+		return flightDAO.findAllBySource(src);
 	}
 
 
@@ -141,15 +171,20 @@ public class FlightService implements FlightInterface{
      * @param src The source location to filter flights by.
      * @param des The destination location to filter flights by.
      * @return A list of flights departing from the source and arriving at the destination.
+	 * @throws ServiceException 
      * @throws ValidationException If validation of the source or destination fails.
      */
-	@Override
-	public List<Flight> findAllBySourcAndDestination(String src, String des) throws ValidationException {
+	public List<Flight> findAllFlightBySourcAndDestination(String src, String des) throws ServiceException ,ValidationException{
 		
-		FlightValidator.validateString(src, "source");
-		FlightValidator.validateString(des, "destination");
 		
-		return flightdao.findAllBySourcAndDestination(src, des);
+		try {
+			FlightValidator.validateString(src, "source");
+			FlightValidator.validateString(des, "destination");
+		} catch (ValidationException e) {
+			throw new ServiceException("no flight available for this route");
+		}
+		
+		return flightDAO.findAllBySourcAndDestination(src, des);
 	}
 
 
@@ -161,18 +196,23 @@ public class FlightService implements FlightInterface{
      * @param ftime The departure time to filter flights by.
      * @return A list of flights departing from the source, arriving at the destination,
      *         and departing at the specified time.
+	 * @throws ServiceException 
      * @throws ValidationException If validation of the source, destination, or time fails.
      */
-	@Override
-	public List<Flight> findAllBySourcAndDestinationAndtime(String src, String des, String ftime) throws ValidationException {
+	public List<Flight> findAllFlightBySourcAndDestinationAndtime(String src, String des, String ftime) throws ServiceException ,ValidationException{
 		
 		Time time = Time.valueOf(ftime);
-		FlightValidator.validateString(src, "source");
-		FlightValidator.validateString(des, "destination");
-		FlightValidator.isValidSqlTimeFormat(time);
+		try {
+			FlightValidator.validateString(des, "destination");
+			FlightValidator.isValidSqlTimeFormat(time);
+			FlightValidator.validateString(src, "source");
+		} catch (ValidationException e) {
+			throw new ServiceException("no flight available for this route and time");
+		}
 		
 		
-		return flightdao.findAllBySourcAndDestinationAndtime(src, des, ftime);
+		
+		return flightDAO.findAllBySourcAndDestinationAndtime(src, des, ftime);
 	}
 
 }

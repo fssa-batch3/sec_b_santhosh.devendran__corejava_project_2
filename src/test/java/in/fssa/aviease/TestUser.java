@@ -26,7 +26,7 @@ public class TestUser {
 	        int existingUserId = 1; 
 
 	        assertDoesNotThrow(() -> {
-	            User user = userService.findById(existingUserId);
+	            User user = userService.findUserById(existingUserId);
 	            assertNotNull(user);
 	        });
 	    }
@@ -36,7 +36,7 @@ public class TestUser {
 	        String existingEmail = "santhosh@gmail.com"; 
 
 	        assertDoesNotThrow(() -> {
-	            User user = userService.findByEmail(existingEmail);
+	            User user = userService.findUserByEmail(existingEmail);
 	            assertNotNull(user);
 	        });
 	    }
@@ -46,14 +46,14 @@ public class TestUser {
 	        long existingMobileNo = 8925054118l; // Replace with an existing mobile number
 
 	        assertDoesNotThrow(() -> {
-	            User user = userService.findByMobileNo(existingMobileNo);
+	            User user = userService.findUserByMobileNo(existingMobileNo);
 	            assertNotNull(user);
 	        });
 	    }
 
 	    @Test
 	    public void testGetAllUsers() {
-	        List<User> userList = userService.getAll();
+	        List<User> userList = userService.getAllUser();
 	        assertNotNull(userList);
 	        assertTrue(userList.size() > 0);
 	    }
