@@ -1,6 +1,7 @@
 package in.fssa.aviease.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class TicketsEntity implements Comparable<TicketsEntity>{
@@ -9,6 +10,25 @@ public class TicketsEntity implements Comparable<TicketsEntity>{
 	private int UserId;
 	private int FlightId;
 	private int priceId;
+	private LocalDateTime booked;
+	
+	public LocalDateTime getBooked() {
+		return booked;
+	}
+
+
+
+	public void setBooked(LocalDateTime booked) {
+		this.booked = booked;
+	}
+
+
+
+	public void setTravelDate(LocalDate travelDate) {
+		this.travelDate = travelDate;
+	}
+
+
 	private LocalDate travelDate;
 	
 	

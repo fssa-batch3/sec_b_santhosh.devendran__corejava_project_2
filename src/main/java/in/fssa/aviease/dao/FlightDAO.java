@@ -2,6 +2,7 @@ package in.fssa.aviease.dao;
 
 import java.sql.Connection;
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,6 +10,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.fssa.aviease.exception.PersistenceException;
 import in.fssa.aviease.interfaces.FlightInterface;
 import in.fssa.aviease.model.Flight;
 import in.fssa.aviease.util.ConnectionUtil;
@@ -16,7 +18,7 @@ import in.fssa.aviease.util.ConnectionUtil;
 public class FlightDAO implements FlightInterface {
 
 	@Override
-	public List<Flight> findAll() {
+	public List<Flight> findAll() throws PersistenceException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		List<Flight> FlightList = new ArrayList<>();
@@ -47,7 +49,7 @@ public class FlightDAO implements FlightInterface {
 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
-			throw new RuntimeException();
+			throw new PersistenceException(e.getMessage());
 		} finally {
 			ConnectionUtil.close(con, ps, rs);
 		}
@@ -56,7 +58,7 @@ public class FlightDAO implements FlightInterface {
 	}
 
 	@Override
-	public void create(Flight flight) {
+	public void create(Flight flight) throws PersistenceException {
 		 Connection con = null;
 		    PreparedStatement ps = null;
 
@@ -77,10 +79,10 @@ public class FlightDAO implements FlightInterface {
 		    } catch (SQLException e) {
 		        e.printStackTrace();
 		        if (e.getMessage().contains("Duplicate entry")) {
-		            throw new RuntimeException("Duplicate constraint");
+		        	throw new PersistenceException("Duplicate entry");
 		        } else {
 		            System.out.println(e.getMessage());
-		            throw new RuntimeException(e);
+		            throw new PersistenceException(e.getMessage());
 		        }
 		    } finally {
 		        ConnectionUtil.close(con, ps);
@@ -90,7 +92,7 @@ public class FlightDAO implements FlightInterface {
 
 
 	@Override
-	public void update(int flightId, Flight newFlight) {
+	public void update(int flightId, Flight newFlight) throws PersistenceException {
 	    Connection con = null;
 	    PreparedStatement ps = null;
 
@@ -115,14 +117,14 @@ public class FlightDAO implements FlightInterface {
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	        System.out.println(e.getMessage());
-	        throw new RuntimeException(e);
+	        throw new PersistenceException(e.getMessage());
 	    } finally {
 	        ConnectionUtil.close(con, ps);
 	    }
 	}
 
 	@Override
-	public void delete(int flightId) {
+	public void delete(int flightId) throws PersistenceException {
 		  Connection con = null;
 		    PreparedStatement ps = null;
 
@@ -140,14 +142,14 @@ public class FlightDAO implements FlightInterface {
 		    } catch (SQLException e) {
 		        e.printStackTrace();
 		        System.out.println(e.getMessage());
-		        throw new RuntimeException(e);
+		        throw new PersistenceException(e.getMessage());
 		    } finally {
 		        ConnectionUtil.close(con, ps);
 		    }
 	}
 
 	@Override
-	public Flight findById(int id) {
+	public Flight findById(int id) throws PersistenceException {
 		   Connection con = null;
 		    PreparedStatement ps = null;
 		    ResultSet rs = null;
@@ -176,7 +178,7 @@ public class FlightDAO implements FlightInterface {
 
 		    } catch (SQLException e) {
 		        System.out.println(e.getMessage());
-		        throw new RuntimeException(e);
+		        throw new PersistenceException(e.getMessage());
 		    } finally {
 		        ConnectionUtil.close(con, ps, rs);
 		    }
@@ -186,7 +188,7 @@ public class FlightDAO implements FlightInterface {
 
 	@SuppressWarnings("null")
 	@Override
-	public Flight findByFlightNo(String flightNo) {
+	public Flight findByFlightNo(String flightNo) throws PersistenceException {
 		  Connection con = null;
 		    PreparedStatement ps = null;
 		    Flight flight = null;
@@ -217,7 +219,7 @@ public class FlightDAO implements FlightInterface {
 
 		    } catch (SQLException e) {
 		        System.out.println(e.getMessage());
-		        throw new RuntimeException(e);
+		        throw new PersistenceException(e.getMessage());
 		    } finally {
 		        ConnectionUtil.close(con, ps, rs);
 		    }
@@ -226,7 +228,7 @@ public class FlightDAO implements FlightInterface {
 	}
 
 	@Override
-	public List<Flight> findByAirLineCode(String airLine) {
+	public List<Flight> findByAirLineCode(String airLine) throws PersistenceException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		List<Flight> FlightList = new ArrayList<>();
@@ -257,7 +259,7 @@ public class FlightDAO implements FlightInterface {
 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
-			throw new RuntimeException();
+			throw new PersistenceException(e.getMessage());
 		} finally {
 			ConnectionUtil.close(con, ps, rs);
 		}
@@ -266,7 +268,7 @@ public class FlightDAO implements FlightInterface {
 	}
 
 	@Override
-	public List<Flight> findAllBySource(String src) {
+	public List<Flight> findAllBySource(String src) throws PersistenceException {
 		 Connection con = null;
 		    PreparedStatement ps = null;
 		    List<Flight> flightList = new ArrayList<>();
@@ -296,7 +298,7 @@ public class FlightDAO implements FlightInterface {
 
 		    } catch (SQLException e) {
 		        System.out.println(e.getMessage());
-		        throw new RuntimeException();
+		        throw new PersistenceException(e.getMessage());
 		    } finally {
 		        ConnectionUtil.close(con, ps, rs);
 		    }
@@ -305,7 +307,7 @@ public class FlightDAO implements FlightInterface {
 	}
 
 	@Override
-	public List<Flight> findAllBySourcAndDestination(String src, String des) {
+	public List<Flight> findAllBySourcAndDestination(String src, String des) throws PersistenceException {
 		  Connection con = null;
 		    PreparedStatement ps = null;
 		    List<Flight> flightList = new ArrayList<>();
@@ -336,7 +338,7 @@ public class FlightDAO implements FlightInterface {
 
 		    } catch (SQLException e) {
 		        System.out.println(e.getMessage());
-		        throw new RuntimeException();
+		        throw new PersistenceException(e.getMessage());
 		    } finally {
 		        ConnectionUtil.close(con, ps, rs);
 		    }
@@ -345,7 +347,7 @@ public class FlightDAO implements FlightInterface {
 	}
 
 	@Override
-	public List<Flight> findAllBySourcAndDestinationAndtime(String src, String des, String startTime) {
+	public List<Flight> findAllBySourcAndDestinationAndtime(String src, String des, String startTime) throws PersistenceException {
 		   Connection con = null;
 		    PreparedStatement ps = null;
 		    List<Flight> flightList = new ArrayList<>();
@@ -381,7 +383,7 @@ public class FlightDAO implements FlightInterface {
 
 		    } catch (SQLException e) {
 		        System.out.println(e.getMessage());
-		        throw new RuntimeException();
+		        throw new PersistenceException(e.getMessage());
 		    } finally {
 		        ConnectionUtil.close(con, ps, rs);
 		    }

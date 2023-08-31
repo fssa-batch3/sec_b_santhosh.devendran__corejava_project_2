@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import in.fssa.aviease.dao.UserDAO;
+import in.fssa.aviease.exception.PersistenceException;
 import in.fssa.aviease.exception.ServiceException;
 import in.fssa.aviease.exception.ValidationException;
 import in.fssa.aviease.model.User;
@@ -21,20 +22,21 @@ public class UserService {
 	 * @throws ServiceException 
      * @throws ValidationException If validation of the user data fails.
      */
-	public void createuser(User user) throws ServiceException ,ValidationException {
+	public void createUser(User user) throws ServiceException ,ValidationException {
 
 		try {
-			UserValidator.validate(user);
+			UserValidator.validateUser(user);
 			UserValidator.emailValidate(user.getEmail());
 			UserValidator.mobileNoValidate(user.getMobileNo());
 			UserValidator.checkNotExistMobileNo(user.getMobileNo());
 			UserValidator.checkNotExistEmail(user.getEmail());
 			UserValidator.passwordValidate(user.getPassword());
-		} catch (ValidationException e) {
-			throw new ServiceException("create user failed");
+			userDAO.create(user);
+		} catch (PersistenceException e) {
+			throw new ServiceException(e.getMessage());
 		}
 		
-		userDAO.create(user);
+		
 
 	}
 	
@@ -55,13 +57,14 @@ public class UserService {
 			UserValidator.checkExistid(newId);
 			UserValidator.stringValidate(newUser.getFirstname(), "Firstname");
 			UserValidator.stringValidate(newUser.getLastname(), "Lastname");
-		} catch (ValidationException e) {
-			throw new ServiceException("update user filed");
+			userDAO.update(newId, newUser);
+		} catch (PersistenceException e) {
+			throw new ServiceException(e.getMessage());
 		}
 		
 		
 
-		userDAO.update(newId, newUser);
+		
 
 	}
 	
@@ -69,9 +72,14 @@ public class UserService {
      * Counts the total number of users.
      *
      * @return The total number of users.
+	 * @throws ServiceException 
      */
-	public int count() {
-		return userDAO.count();
+	public int count() throws ServiceException {
+		try {
+			return userDAO.count();
+		} catch (PersistenceException e) {
+			throw new ServiceException(e.getMessage());
+		}
 
 	}
 	
@@ -80,22 +88,23 @@ public class UserService {
     /**
      * Finds a user by their ID.
      *
-     * @param newId The ID of the user to be retrieved.
+     * @param i The ID of the user to be retrieved.
      * @return The found user.
      * @throws ServiceException 
      * @throws ValidationException If validation of the ID fails.
      */
-	public User findUserById(int newId) throws ServiceException ,ValidationException{
+	public User findUserById(int i) throws ServiceException ,ValidationException{
 		
 		try {
-			UserValidator.idValidate(newId);
-			UserValidator.checkExistid(newId);
-		} catch (ValidationException e) {
-			throw new ServiceException("user not found");
+			UserValidator.idValidate(i);
+			UserValidator.checkExistid(i);
+
+			return userDAO.findById(i);
+		} catch (PersistenceException e) {
+			throw new ServiceException(e.getMessage());
 		}
 		
 		
-		return userDAO.findById(newId);
 
 	}
 
@@ -111,11 +120,12 @@ public class UserService {
 		
 		try {
 			UserValidator.emailValidate(Email);
-		} catch (ValidationException e) {
-			throw new ServiceException("user not found");
+			return userDAO.findByEmail(Email);
+		} catch (PersistenceException e) {
+			throw new ServiceException(e.getMessage());
 		}
 
-		return userDAO.findByEmail(Email);
+	
 
 	}
 	
@@ -131,11 +141,13 @@ public class UserService {
 	{
 		try {
 			UserValidator.mobileNoValidate(mobileNumber);
-		} catch (ValidationException e) {
-			throw new ServiceException("user not found");
+			return userDAO.findByMobileNo(mobileNumber);
+		} catch (PersistenceException e) {
+			throw new ServiceException(e.getMessage());
+		
 		}
 
-		return userDAO.findByMobileNo(mobileNumber);
+		
 
 	}
 
@@ -143,10 +155,15 @@ public class UserService {
      * Retrieves a list of all users.
      *
      * @return A list of all users.
+	 * @throws ServiceException 
      */
-	public List<User> getAllUser() {
+	public List<User> getAllUser() throws ServiceException {
 
-		return userDAO.findAll();
+		try {
+			return userDAO.findAll();
+		} catch (PersistenceException e) {
+			throw new ServiceException(e.getMessage());
+		}
 
 	}
 	

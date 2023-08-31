@@ -2,11 +2,13 @@ package in.fssa.aviease.service;
 
 import java.sql.Time;
 
+
 import java.util.List;
 
 import in.fssa.aviease.model.Flight;
 import in.fssa.aviease.validator.FlightValidator;
 import in.fssa.aviease.dao.FlightDAO;
+import in.fssa.aviease.exception.PersistenceException;
 import in.fssa.aviease.exception.ServiceException;
 import in.fssa.aviease.exception.ValidationException;
 
@@ -20,9 +22,15 @@ public class FlightService {
      * Retrieves a list of all flights.
      *
      * @return A list of all flights.
+	 * @throws ServiceException 
+	 * @throws PersistenceException 
      */
-	public List<Flight> findAllFlight() {
-		return flightDAO.findAll();
+	public List<Flight> findAllFlight() throws ServiceException, ValidationException{
+		try {
+			return flightDAO.findAll();
+		} catch (PersistenceException e) {
+			throw new ServiceException(e.getMessage());
+		}
 	}
 
 	 /**
@@ -31,16 +39,19 @@ public class FlightService {
      * @param flight The flight object to be created.
 	 * @throws ServiceException 
      * @throws ValidationException If validation of the flight fails.
+	 * @throws  
      */
 	public void createFlight(Flight t) throws ServiceException ,ValidationException{
 		
 		try {
 			FlightValidator.validateFlight(t);
-		} catch (ValidationException e) {
-			throw new ServiceException("flight create failed");
+			flightDAO.create(t);
+		} catch (PersistenceException e) {
+			
+			throw new ServiceException(e.getMessage());
 		}
 		
-		flightDAO.create(t);
+		
 		
 	}
 
@@ -57,12 +68,13 @@ public class FlightService {
 		try {
 			FlightValidator.flightIdExist(id);
 			FlightValidator.validateFlight(t);
-		} catch (ValidationException e) {
-			throw new ServiceException("flight update failed");
+			flightDAO.update(id, t);
+		} catch (PersistenceException e) {
+			throw new ServiceException(e.getMessage());
 		}
 		
 		
-		flightDAO.update(id, t);
+		
 		
 	}
 
@@ -78,10 +90,11 @@ public class FlightService {
 		
 		try {
 			FlightValidator.flightIdExist(id);
-		} catch (ValidationException e) {
-			throw new ServiceException("flight not deleted");
+			flightDAO.delete(id);
+		} catch (PersistenceException e) {
+			throw new ServiceException(e.getMessage());
 		}
-		flightDAO.delete(id);
+		
 		
 	}
 
@@ -98,10 +111,11 @@ public class FlightService {
 		
 		try {
 			FlightValidator.flightIdExist(id);
-		} catch (ValidationException e) {
-			throw new ServiceException("no flight found");
+			return	flightDAO.findById(id);
+		} catch (PersistenceException e) {
+			throw new ServiceException(e.getMessage());
 		} 
-	return	flightDAO.findById(id);
+	
 		
 	}
 
@@ -118,10 +132,11 @@ public class FlightService {
 		
 		try {
 			FlightValidator.flightNoExist(flightNo);
-		} catch (ValidationException e) {
-			throw new ServiceException("no flight found");
+			return flightDAO.findByFlightNo(flightNo);
+		} catch (PersistenceException e) {
+			throw new ServiceException(e.getMessage());
 		}
-		return flightDAO.findByFlightNo(flightNo);
+		
 	}
 
 
@@ -137,11 +152,12 @@ public class FlightService {
 		
 		try {
 			FlightValidator.validateString(airLine, "airline");
-		} catch (ValidationException e) {
-			throw new ServiceException("no flight found in this air line");
+			return flightDAO.findByAirLineCode(airLine);
+		} catch (PersistenceException e) {
+			throw new ServiceException(e.getMessage());
 		}
 		
-		return flightDAO.findByAirLineCode(airLine);
+		
 	}
 
 
@@ -157,11 +173,12 @@ public class FlightService {
 		
 		try {
 			FlightValidator.validateString(src, "source");
-		} catch (ValidationException e) {
-			throw new ServiceException("no flight available from this city");
+			return flightDAO.findAllBySource(src);
+		} catch (PersistenceException e) {
+			throw new ServiceException(e.getMessage());
 		}
 		
-		return flightDAO.findAllBySource(src);
+		
 	}
 
 
@@ -180,11 +197,12 @@ public class FlightService {
 		try {
 			FlightValidator.validateString(src, "source");
 			FlightValidator.validateString(des, "destination");
-		} catch (ValidationException e) {
-			throw new ServiceException("no flight available for this route");
+			return flightDAO.findAllBySourcAndDestination(src, des);
+		} catch (PersistenceException e) {
+			throw new ServiceException(e.getMessage());
 		}
 		
-		return flightDAO.findAllBySourcAndDestination(src, des);
+		
 	}
 
 
@@ -206,13 +224,14 @@ public class FlightService {
 			FlightValidator.validateString(des, "destination");
 			FlightValidator.isValidSqlTimeFormat(time);
 			FlightValidator.validateString(src, "source");
-		} catch (ValidationException e) {
-			throw new ServiceException("no flight available for this route and time");
+			return flightDAO.findAllBySourcAndDestinationAndtime(src, des, ftime);
+		} catch (PersistenceException e) {
+			throw new ServiceException(e.getMessage());
 		}
 		
 		
 		
-		return flightDAO.findAllBySourcAndDestinationAndtime(src, des, ftime);
+		
 	}
 
 }

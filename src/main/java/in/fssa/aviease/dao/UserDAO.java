@@ -1,12 +1,14 @@
 package in.fssa.aviease.dao;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.fssa.aviease.exception.PersistenceException;
 import in.fssa.aviease.interfaces.UserInterface;
 import in.fssa.aviease.model.User;
 import in.fssa.aviease.util.ConnectionUtil;
@@ -15,7 +17,7 @@ import in.fssa.aviease.util.ConnectionUtil;
 public class UserDAO implements UserInterface{
 
 	@Override
-	public List<User> findAll() {
+	public List<User> findAll() throws PersistenceException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		List<User> userList = new ArrayList<>();
@@ -42,7 +44,7 @@ public class UserDAO implements UserInterface{
 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
-			throw new RuntimeException();
+			throw new PersistenceException(e.getMessage());
 		} finally {
 			ConnectionUtil.close(con, ps, rs);
 		}
@@ -52,7 +54,7 @@ public class UserDAO implements UserInterface{
 	}
 
 	@Override
-	public void create(User user) {
+	public void create(User user) throws PersistenceException {
 
 		
 		Connection con = null;
@@ -78,7 +80,7 @@ public class UserDAO implements UserInterface{
 				throw new RuntimeException("Duplicate constraint");
 			} else {
 				System.out.println(e.getMessage());
-				throw new RuntimeException(e);
+				throw new PersistenceException(e.getMessage());
 			}
 		} finally {
 			ConnectionUtil.close(con, ps);
@@ -90,7 +92,7 @@ public class UserDAO implements UserInterface{
 
 
 	@Override
-	public void update(int id, User newUser) {
+	public void update(int id, User newUser) throws PersistenceException {
 		Connection con = null;
 		PreparedStatement ps = null;
 
@@ -109,7 +111,7 @@ public class UserDAO implements UserInterface{
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
-			throw new RuntimeException(e);
+			throw new PersistenceException(e.getMessage());
 		} finally {
 			ConnectionUtil.close(con, ps);
 		}
@@ -126,7 +128,7 @@ public class UserDAO implements UserInterface{
 	
 
 	@Override
-	public User findById(int id) {
+	public User findById(int id) throws PersistenceException {
 		
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -156,7 +158,7 @@ public class UserDAO implements UserInterface{
 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
-			throw new RuntimeException();
+			throw new PersistenceException(e.getMessage());
 		} finally {
 			ConnectionUtil.close(con, ps, rs);
 		}
@@ -166,7 +168,7 @@ public class UserDAO implements UserInterface{
 	}
 
 	@Override
-	public User findByEmail(String email) {
+	public User findByEmail(String email) throws PersistenceException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -192,7 +194,7 @@ public class UserDAO implements UserInterface{
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
-			throw new RuntimeException(e);
+			throw new PersistenceException(e.getMessage());
 		} finally {
 			ConnectionUtil.close(con, ps, rs);
 		}
@@ -201,7 +203,7 @@ public class UserDAO implements UserInterface{
 	}
 
 	@Override
-	public User findByMobileNo(long mobileNo) {
+	public User findByMobileNo(long mobileNo) throws PersistenceException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -228,7 +230,7 @@ public class UserDAO implements UserInterface{
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
-			throw new RuntimeException(e);
+			throw new PersistenceException(e.getMessage());
 		} finally {
 			ConnectionUtil.close(con, ps, rs);
 		}
@@ -237,7 +239,7 @@ public class UserDAO implements UserInterface{
 	}
 
 	@Override
-	public int count() {
+	public int count() throws PersistenceException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -256,7 +258,7 @@ public class UserDAO implements UserInterface{
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
-			throw new RuntimeException(e);
+			throw new PersistenceException(e.getMessage());
 		} finally {
 			ConnectionUtil.close(con, ps, rs);
 		}

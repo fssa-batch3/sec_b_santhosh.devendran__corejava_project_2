@@ -1,6 +1,7 @@
 package in.fssa.aviease.model;
 
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -44,6 +45,16 @@ public class PriceEntity implements Comparable<PriceEntity>{
 	      this.startDate = date;
 	}
 
+	public void setStartDateFormat(LocalDate startDate){
+	
+	      this.startDate = startDate;
+	}
+	
+	public void setEndDateFormat(LocalDate endDate) {
+		
+		
+		this.endDate = endDate;
+	}
 
 
 	public LocalDate getEndDate() {

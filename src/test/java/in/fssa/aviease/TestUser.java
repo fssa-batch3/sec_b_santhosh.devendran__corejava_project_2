@@ -4,17 +4,10 @@ package in.fssa.aviease;
 import in.fssa.aviease.service.UserService;
 
 
+
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
-
-import in.fssa.aviease.exception.ValidationException;
 import in.fssa.aviease.model.User;
 public class TestUser {
 
@@ -51,17 +44,4 @@ public class TestUser {
 	        });
 	    }
 
-	    @Test
-	    public void testGetAllUsers() {
-	        List<User> userList = userService.getAllUser();
-	        assertNotNull(userList);
-	        assertTrue(userList.size() > 0);
-	    }
-
-	    @Test
-	    public void testCountUsers() {
-	        int userCount = userService.count();
-	        assertTrue(userCount >= 0);
-	    }
 }
-

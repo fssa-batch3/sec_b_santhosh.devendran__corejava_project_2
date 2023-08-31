@@ -1,5 +1,6 @@
 package in.fssa.aviease.exception;
 
+
 public class ServiceException extends Exception{
 
 	/**

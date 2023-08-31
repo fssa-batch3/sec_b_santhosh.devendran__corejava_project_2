@@ -16,4 +16,6 @@ public class Price extends PriceEntity{
 	public Price() {
 		super();
 	}
+
+	
 }

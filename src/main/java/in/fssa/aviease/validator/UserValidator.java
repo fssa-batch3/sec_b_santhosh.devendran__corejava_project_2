@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import in.fssa.aviease.dao.UserDAO;
+import in.fssa.aviease.exception.PersistenceException;
 import in.fssa.aviease.exception.ValidationException;
 import in.fssa.aviease.model.User;
 import in.fssa.aviease.util.StringUtil;
@@ -19,7 +20,7 @@ public class UserValidator {
      * @param newUser The User object to be validated.
      * @throws ValidationException If validation of the user fails.
      */
-	public static void validate(User newUser) throws ValidationException {
+	public static void validateUser(User newUser) throws ValidationException {
 		if (newUser == null) {
 			throw new ValidationException("invalid user input");
 		}
@@ -51,7 +52,11 @@ public class UserValidator {
 		UserDAO userDAO = new UserDAO();
 		User user = new User();
 		
-		user = userDAO.findByEmail(email);
+		try {
+			user = userDAO.findByEmail(email);
+		} catch (PersistenceException e) {
+			throw new ValidationException(e.getMessage());
+		}
 		
 		if(user != null) {
 			throw new ValidationException("email already exist");
@@ -69,7 +74,11 @@ public class UserValidator {
 		UserDAO userDAO = new UserDAO();
 		User user = new User();
 		
-		user = userDAO.findByMobileNo(mobile);
+		try {
+			user = userDAO.findByMobileNo(mobile);
+		} catch (PersistenceException e) {
+			throw new ValidationException(e.getMessage());
+		}
 		
 		if(user != null) {
 			throw new ValidationException("mobile number already exist");
@@ -87,7 +96,11 @@ public class UserValidator {
 		UserDAO userDAO = new UserDAO();
 		User user = new User();
 		
-		user = userDAO.findByEmail(email);
+		try {
+			user = userDAO.findByEmail(email);
+		} catch (PersistenceException e) {
+			throw new ValidationException(e.getMessage());
+		}
 		
 		if(user == null) {
 			throw new ValidationException("user not found");
@@ -105,7 +118,11 @@ public class UserValidator {
 		UserDAO userDAO = new UserDAO();
 		User user = new User();
 		
-		user = userDAO.findByMobileNo(mobile);
+		try {
+			user = userDAO.findByMobileNo(mobile);
+		} catch (PersistenceException e) {
+			throw new ValidationException(e.getMessage());
+		}
 		
 		if(user == null) {
 			throw new ValidationException("user not found");
@@ -123,7 +140,11 @@ public class UserValidator {
 		UserDAO userDAO = new UserDAO();
 		User user = new User();
 		
-		user = userDAO.findById(id);
+		try {
+			user = userDAO.findById(id);
+		} catch (PersistenceException e) {
+			throw new ValidationException(e.getMessage());
+		}
 		
 		if(user == null) {
 			throw new ValidationException("user not found");

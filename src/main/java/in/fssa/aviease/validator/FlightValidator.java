@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import in.fssa.aviease.exception.PersistenceException;
 import in.fssa.aviease.exception.ValidationException;
 import in.fssa.aviease.model.Flight;
 import in.fssa.aviease.dao.FlightDAO;
@@ -94,7 +95,11 @@ public class FlightValidator {
 		FlightDAO fdao = new FlightDAO();
 		Flight check = new Flight();
 
-		check = fdao.findByFlightNo(flightNo);
+		try {
+			check = fdao.findByFlightNo(flightNo);
+		} catch (PersistenceException e) {
+			throw new ValidationException(e.getMessage());
+		}
 
 		if (check != null) {
 			throw new ValidationException("flight already exist");
@@ -114,7 +119,11 @@ public class FlightValidator {
 		FlightDAO flightDAO = new FlightDAO();
 		Flight check = new Flight();
 
-		check = flightDAO.findByFlightNo(flightNo);
+		try {
+			check = flightDAO.findByFlightNo(flightNo);
+		} catch (PersistenceException e) {
+			throw new ValidationException(e.getMessage());
+		}
 
 		if (check == null) {
 			throw new ValidationException("flight not exist");
@@ -134,7 +143,11 @@ public class FlightValidator {
 		FlightDAO flightDAO = new FlightDAO();
 		Flight check = new Flight();
 
-		check = flightDAO.findById(flightId);
+		try {
+			check = flightDAO.findById(flightId);
+		} catch (PersistenceException e) {
+			throw new ValidationException(e.getMessage());
+		}
 
 		if (check == null) {
 			throw new ValidationException("flight already not exist");
