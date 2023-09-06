@@ -24,6 +24,7 @@ public class TestUpdateFlight {
 	 	       flight.setDayId(2);
 	 	       flight.setFlightStatus(true);
 	 	       flight.setFlightTimeString("08:30:00");
+	 	       flight.setPrice(299.00);
 	 	       flight.setNoOfSeats(330);
 	 	       
 	 	      flightService.updateFlight(82,flight);

@@ -13,5 +13,6 @@ public interface TicketsInterface extends Base<Tickets>{
 	public abstract List<Tickets> findByTravelDate(LocalDate id) throws PersistenceException;
 	public abstract List<Tickets> findByFlightId(int flightId) throws PersistenceException;
 	public abstract List<Tickets> findByPriceId(int id) throws PersistenceException;
+	List<Tickets> findByFlightIdAndTravelDate(int flightId, LocalDate travelDate) throws PersistenceException;
 	
 }

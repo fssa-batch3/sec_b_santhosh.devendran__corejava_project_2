@@ -109,34 +109,31 @@ public class AirLineDAO implements AirLineInterface{
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		AirLine airLine=new AirLine();
-		
-		try {
-			String query = "SELECT id, airline_name, airline_code FROM airlines Where id=?";
-			con = ConnectionUtil.getConnection();
-			ps = con.prepareStatement(query);
-			ps.setInt(3,id);
-			rs = ps.executeQuery(query);
+		AirLine airLine = new AirLine();
 
-			while (rs.next()) {
-				
-				
-				airLine.setId(rs.getInt("id"));
-				airLine.setAirLineCode(rs.getString("airline_code"));
-				airLine.setAirLineName(rs.getString("airline_name"));
-				
-				
-			}
+		try {
+		    String query = "SELECT id, airline_name, airline_code FROM airlines WHERE id=?";
+		    con = ConnectionUtil.getConnection();
+		    ps = con.prepareStatement(query);
+		    ps.setInt(1, id); 
+
+		    rs = ps.executeQuery();
+
+		    while (rs.next()) {
+		        airLine.setId(rs.getInt("id"));
+		        airLine.setAirLineCode(rs.getString("airline_code"));
+		        airLine.setAirLineName(rs.getString("airline_name"));
+		    }
 
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			throw new PersistenceException(e.getMessage());
+		    System.out.println(e.getMessage());
+		    throw new PersistenceException(e.getMessage());
 		} finally {
-			ConnectionUtil.close(con, ps, rs);
+		    ConnectionUtil.close(con, ps, rs);
 		}
 
 		return airLine;
-		
+
 		
 	}
 

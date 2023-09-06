@@ -5,7 +5,7 @@ import java.sql.Time;
 public class Flight extends FlightEntity{
 	
     
-	public Flight(int id,String src,String destination,String airLinecode,String flightNo,int dayId,boolean flightStatus,Time flighttime,int noOfSeats) {
+	public Flight(int id,String src,String destination,String airLinecode,String flightNo,int dayId,boolean flightStatus,Time flighttime,int noOfSeats,double price) {
 		
 		super.setId(id);
 		super.setSrc(src);
@@ -17,6 +17,7 @@ public class Flight extends FlightEntity{
 		super.setFlightStatus(flightStatus);
 		super.setFlightTime(flighttime);
 		super.setNoOfSeats(noOfSeats);
+		super.setPrice(price);
 		
 		
 	}

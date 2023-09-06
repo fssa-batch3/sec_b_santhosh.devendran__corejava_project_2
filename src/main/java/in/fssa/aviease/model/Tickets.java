@@ -1,5 +1,7 @@
 package in.fssa.aviease.model;
 
+import java.time.LocalDate;
+
 public class Tickets extends TicketsEntity{
 
 	public Tickets(int id,int userId,int fligthId,int priceId,String travelDate) {
@@ -15,4 +17,6 @@ public class Tickets extends TicketsEntity{
 	public Tickets() {
 		super();
 	}
+
+
 }

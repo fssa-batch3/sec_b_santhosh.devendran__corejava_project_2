@@ -7,17 +7,13 @@ import in.fssa.aviease.model.Tickets;
 
 public class TicketsValidator {
 
-	
-	public static void validateTicket(Tickets ticket)throws ValidationException{
+public static void validateTicket(Tickets ticket)throws ValidationException{
 		
-		if(!isTodayOrFuture(ticket.getTravelDate())) {
-			throw new ValidationException("check the date date can not be past");
+		if(ticket == null) {
+			throw new ValidationException("ERROR try again");
 		}
 		
 	}
 	
-	 public static boolean isTodayOrFuture(LocalDate date) {
-	        LocalDate today = LocalDate.now();
-	        return !date.isBefore(today);
-	    }
+
 }

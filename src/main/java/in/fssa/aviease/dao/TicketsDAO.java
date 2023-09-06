@@ -25,7 +25,7 @@ public class TicketsDAO implements TicketsInterface{
 	        List<Tickets> ticketsList = new ArrayList<>();
 
 	        try {
-	            String query = "SELECT id, user_id, flight_id, created_at, price_id, travel_date FROM tickets";
+	            String query = "SELECT id, user_id, flight_id, created_at, travel_date FROM tickets";
 	            con = ConnectionUtil.getConnection();
 	            ps = con.prepareStatement(query);
 	            rs = ps.executeQuery();
@@ -36,7 +36,6 @@ public class TicketsDAO implements TicketsInterface{
 	                ticket.setUserId(rs.getInt("user_id"));
 	                ticket.setFlightId(rs.getInt("flight_id"));
 	                ticket.setBooked(rs.getTimestamp("created_at").toLocalDateTime());
-	                ticket.setPriceId(rs.getInt("price_id"));
 	                ticket.setTravelDate(rs.getDate("travel_date").toLocalDate());
 	                ticketsList.add(ticket);
 	            }
@@ -55,14 +54,14 @@ public class TicketsDAO implements TicketsInterface{
 	        PreparedStatement ps = null;
 
 	        try {
-	            String query = "INSERT INTO tickets (user_id, flight_id, price_id, travel_date) VALUES (?, ?, ?, ?)";
+	            String query = "INSERT INTO tickets (user_id, flight_id, travel_date) VALUES (?, ?, ?)";
 	            con = ConnectionUtil.getConnection();
 	            ps = con.prepareStatement(query);
 	            
 	            ps.setInt(1, ticket.getUserId());
 	            ps.setInt(2, ticket.getFlightId());
-	            ps.setInt(3, ticket.getPriceId());
-	            ps.setDate(4, Date.valueOf(ticket.getTravelDate()));	            
+	       //     ps.setInt(3, ticket.getPriceId());
+	            ps.setDate(3, Date.valueOf(ticket.getTravelDate()));	            
 	            ps.executeUpdate();
 	        } catch (SQLException e) {
 	            throw new PersistenceException(e.getMessage());
@@ -91,7 +90,7 @@ public class TicketsDAO implements TicketsInterface{
 	        Tickets ticket = null;
 
 	        try {
-	            String query = "SELECT id, user_id, flight_id, created_at, price_id, travel_date FROM tickets WHERE id = ?";
+	            String query = "SELECT id, user_id, flight_id, created_at, travel_date FROM tickets WHERE id = ?";
 	            con = ConnectionUtil.getConnection();
 	            ps = con.prepareStatement(query);
 	            ps.setInt(1, id);
@@ -103,7 +102,7 @@ public class TicketsDAO implements TicketsInterface{
 	                ticket.setId(rs.getInt("id"));
 	                ticket.setUserId(rs.getInt("user_id"));
 	                ticket.setFlightId(rs.getInt("flight_id"));
-	                ticket.setPriceId(rs.getInt("price_id"));
+	              //  ticket.setPriceId(rs.getInt("price_id"));
 	                ticket.setTravelDate(rs.getDate("travel_date").toLocalDate());
 	                // Set other attributes if needed
 	            }
@@ -124,7 +123,7 @@ public class TicketsDAO implements TicketsInterface{
 	        List<Tickets> ticketsList = new ArrayList<>();
 
 	        try {
-	            String query = "SELECT id, flight_id, created_at, price_id, travel_date FROM tickets WHERE user_id = ?";
+	            String query = "SELECT id, flight_id, created_at, travel_date FROM tickets WHERE user_id = ?";
 	            con = ConnectionUtil.getConnection();
 	            ps = con.prepareStatement(query);
 	            ps.setInt(1, id);
@@ -136,7 +135,7 @@ public class TicketsDAO implements TicketsInterface{
 	                ticket.setId(rs.getInt("id"));
 	                ticket.setFlightId(rs.getInt("flight_id"));
 	                ticket.setBooked(rs.getTimestamp("created_at").toLocalDateTime());
-	                ticket.setPriceId(rs.getInt("price_id"));
+	             //   ticket.setPriceId(rs.getInt("price_id"));
 	                ticket.setTravelDate(rs.getDate("travel_date").toLocalDate());
 	                ticketsList.add(ticket);
 	            }
@@ -157,7 +156,7 @@ public class TicketsDAO implements TicketsInterface{
 	        List<Tickets> ticketsList = new ArrayList<>();
 
 	        try {
-	            String query = "SELECT id, flight_id, created_at, price_id FROM tickets WHERE travel_date = ?";
+	            String query = "SELECT id, flight_id, created_at FROM tickets WHERE travel_date = ?";
 	            con = ConnectionUtil.getConnection();
 	            ps = con.prepareStatement(query);
 	            ps.setDate(1, java.sql.Date.valueOf(date));
@@ -169,7 +168,7 @@ public class TicketsDAO implements TicketsInterface{
 	                ticket.setId(rs.getInt("id"));
 	                ticket.setFlightId(rs.getInt("flight_id"));
 	                ticket.setBooked(rs.getTimestamp("created_at").toLocalDateTime());
-	                ticket.setPriceId(rs.getInt("price_id"));
+	              //  ticket.setPriceId(rs.getInt("price_id"));
 	                ticket.setTravelDate(rs.getDate("travel_date").toLocalDate());
 	                ticketsList.add(ticket);
 	            }
@@ -190,7 +189,7 @@ public class TicketsDAO implements TicketsInterface{
 	        List<Tickets> ticketsList = new ArrayList<>();
 
 	        try {
-	            String query = "SELECT id, user_id, created_at, price_id, travel_date FROM tickets WHERE flight_id = ?";
+	            String query = "SELECT id, user_id, created_at, travel_date FROM tickets WHERE flight_id = ?";
 	            con = ConnectionUtil.getConnection();
 	            ps = con.prepareStatement(query);
 	            ps.setInt(1, flightId);
@@ -202,7 +201,7 @@ public class TicketsDAO implements TicketsInterface{
 	                ticket.setId(rs.getInt("id"));
 	                ticket.setUserId(rs.getInt("user_id"));
 	                ticket.setBooked(rs.getTimestamp("created_at").toLocalDateTime());
-	                ticket.setPriceId(rs.getInt("price_id"));
+	                //ticket.setPriceId(rs.getInt("price_id"));
 	                ticket.setTravelDate(rs.getDate("travel_date").toLocalDate());
 	                ticketsList.add(ticket);
 	            }
@@ -254,4 +253,44 @@ public class TicketsDAO implements TicketsInterface{
 	        return listOfTickets;
 	}
 
+	
+	@Override
+	public List<Tickets> findByFlightIdAndTravelDate(int flightId, LocalDate travelDate) throws PersistenceException {
+	    Connection con = null;
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+	    Tickets ticket = null;
+	    
+	    List<Tickets> listOfTickets = new ArrayList<>();
+
+	    try {
+	        String query = "SELECT id, user_id, flight_id, created_at, travel_date FROM tickets WHERE flight_id = ? AND travel_date = ?";
+	        con = ConnectionUtil.getConnection();
+	        ps = con.prepareStatement(query);
+	        ps.setInt(1, flightId);
+	        ps.setDate(2, java.sql.Date.valueOf(travelDate));
+
+	        rs = ps.executeQuery();
+
+	        while (rs.next()) {
+	            ticket = new Tickets();
+	            ticket.setId(rs.getInt("id"));
+	            ticket.setUserId(rs.getInt("user_id"));
+	            ticket.setFlightId(rs.getInt("flight_id"));
+	            ticket.setBooked(rs.getTimestamp("created_at").toLocalDateTime());
+	            ticket.setTravelDate(rs.getDate("travel_date").toLocalDate());
+	            //ticket.setPriceId(rs.getInt("price_id"));
+	            
+	            listOfTickets.add(ticket);
+	        }
+	    } catch (SQLException e) {
+	        throw new PersistenceException(e.getMessage());
+	    } finally {
+	        ConnectionUtil.close(con, ps, rs);
+	    }
+
+	    return listOfTickets;
+	}
+
+	
 }

@@ -25,13 +25,13 @@ public class ConnectionUtil {
         String passWord;
 
 //        
-//            url = System.getenv("DATABASE_HOSTNAME");
-//            userName = System.getenv("DATABASE_USERNAME");
-//            passWord = System.getenv("DATABASE_PASSWORD");
+            url = System.getenv("DATABASE_HOSTNAME");
+            userName = System.getenv("DATABASE_USERNAME");
+            passWord = System.getenv("DATABASE_PASSWORD");
 //     
-        	 url ="jdbc:mysql://localhost:3306/aviease";
-    		userName ="root";
-    		 passWord ="123456";
+//        	 url ="jdbc:mysql://localhost:3306/aviease";
+//    		userName ="root";
+//    		 passWord ="123456";
     		
         
 		

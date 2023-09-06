@@ -33,6 +33,7 @@ public class TestCreateFlight {
 	       flight.setFlightNo("a".concat(random4DigitString));
 	       flight.setDayId(2);
 	       flight.setFlightStatus(true);
+	       flight.setPrice(356.00);
 	       flight.setFlightTimeString("08:30:00");
 	       flight.setNoOfSeats(330);
 	       
@@ -63,6 +64,7 @@ public class TestCreateFlight {
 	 	       flight.setAirlineCode("342");
 	 	       flight.setFlightNo("ai76");
 	 	       flight.setDayId(2);
+	 	      flight.setPrice(356.00);
 	 	       flight.setFlightStatus(true);
 	 	       flight.setFlightTimeString("08:30:00");
 	 	       flight.setNoOfSeats(330);
@@ -84,6 +86,7 @@ public class TestCreateFlight {
 	 	       flight.setAirlineCode("342");
 	 	       flight.setFlightNo("ai76");
 	 	       flight.setDayId(2);
+	 	      flight.setPrice(356.00);
 	 	       flight.setFlightStatus(true);
 	 	       flight.setFlightTimeString("08:30:00");
 	 	       flight.setNoOfSeats(330);
@@ -105,6 +108,7 @@ public class TestCreateFlight {
 	 	       flight.setAirlineCode("342");
 	 	       flight.setFlightNo("ai76");
 	 	       flight.setDayId(2);
+	 	      flight.setPrice(356.00);
 	 	       flight.setFlightStatus(true);
 	 	       flight.setFlightTimeString("08:30:00");
 	 	       flight.setNoOfSeats(330);
@@ -126,6 +130,7 @@ public class TestCreateFlight {
 	 	       flight.setAirlineCode("342");
 	 	       flight.setFlightNo("ai76");
 	 	       flight.setDayId(2);
+	 	      flight.setPrice(356.00);
 	 	       flight.setFlightStatus(true);
 	 	       flight.setFlightTimeString("08:30:00");
 	 	       flight.setNoOfSeats(330);
@@ -147,6 +152,7 @@ public class TestCreateFlight {
 	 	       flight.setAirlineCode("");
 	 	       flight.setFlightNo("ai76");
 	 	       flight.setDayId(2);
+	 	      flight.setPrice(356.00);
 	 	       flight.setFlightStatus(true);
 	 	       flight.setFlightTimeString("08:30:00");
 	 	       flight.setNoOfSeats(330);
@@ -168,6 +174,7 @@ public class TestCreateFlight {
 	 	       flight.setAirlineCode(null);
 	 	       flight.setFlightNo("9875");
 	 	       flight.setDayId(2);
+	 	      flight.setPrice(356.00);
 	 	       flight.setFlightStatus(true);
 	 	       flight.setFlightTimeString("08:30:00");
 	 	       flight.setNoOfSeats(330);
@@ -190,6 +197,7 @@ public class TestCreateFlight {
 	 	       flight.setAirlineCode("543");
 	 	       flight.setFlightNo(null);
 	 	       flight.setDayId(2);
+	 	      flight.setPrice(356.00);
 	 	       flight.setFlightStatus(true);
 	 	       flight.setFlightTimeString("08:30:00");
 	 	       flight.setNoOfSeats(330);
@@ -211,6 +219,7 @@ public class TestCreateFlight {
 	 	       flight.setAirlineCode("676");
 	 	       flight.setFlightNo("");
 	 	       flight.setDayId(2);
+	 	      flight.setPrice(356.00);
 	 	       flight.setFlightStatus(true);
 	 	       flight.setFlightTimeString("08:30:00");
 	 	       flight.setNoOfSeats(330);

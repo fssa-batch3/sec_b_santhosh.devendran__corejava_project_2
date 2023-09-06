@@ -9,6 +9,7 @@ import in.fssa.aviease.exception.PersistenceException;
 import in.fssa.aviease.exception.ServiceException;
 import in.fssa.aviease.exception.ValidationException;
 import in.fssa.aviease.model.Tickets;
+import in.fssa.aviease.validator.TicketsValidator;
 
 public class TicketsService {
 
@@ -31,6 +32,8 @@ public class TicketsService {
 		TicketsDAO tD=new TicketsDAO();
 		
 		try {
+			TicketsValidator.validateTicket(ticket);
+			
 			tD.create(ticket);
 		} catch (PersistenceException e) {
 			e.printStackTrace();
@@ -120,5 +123,20 @@ public class TicketsService {
 		}
 		return listOfTickets;
 	}
+
+	public List<Tickets> findByFlightIdTravelDate(int flightId,LocalDate date) throws ServiceException,ValidationException {
+		List<Tickets> listOfTickets=new ArrayList<>();
+		TicketsDAO tD=new TicketsDAO();
+		
+		try {
+			listOfTickets=tD.findByFlightIdAndTravelDate(flightId, date);
+		} catch (PersistenceException e) {
+			e.printStackTrace();
+			throw new ServiceException(e.getMessage());
+		}
+		return listOfTickets;
+	}
+	
+	
 
 }

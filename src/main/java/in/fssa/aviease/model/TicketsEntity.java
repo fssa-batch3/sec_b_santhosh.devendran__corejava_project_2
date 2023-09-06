@@ -11,6 +11,7 @@ public class TicketsEntity implements Comparable<TicketsEntity>{
 	private int FlightId;
 	private int priceId;
 	private LocalDateTime booked;
+
 	
 	public LocalDateTime getBooked() {
 		return booked;

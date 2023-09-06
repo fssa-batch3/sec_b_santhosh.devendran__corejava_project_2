@@ -17,8 +17,18 @@ public class DaysValidator {
 		}
 		
 		validateFlightNo(day.getFlightNo());
-		validateFlightNoExists(day.getFlightNo());
+	//	validateFlightNoExists(day.getFlightNo());
+		validateAtLeastOneDaySelected(day);
 	}
+	
+	public static void validateAtLeastOneDaySelected(Days days) throws ValidationException {
+		
+	    if (!days.getMon() && !days.getTue() && !days.getWed() && !days.getThu() && !days.getFri() && !days.getSat() && !days.getSun()) {
+	        throw new ValidationException("At least one day must be selected");
+	    }
+	    
+	}
+
 	
 	public static void validateId(int id) throws ValidationException{
 		if(id < 1) {

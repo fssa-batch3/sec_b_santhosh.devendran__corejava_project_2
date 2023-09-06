@@ -13,6 +13,7 @@ public abstract class FlightEntity implements Comparable<FlightEntity> {
 	    private boolean flightStatus;
 	    private Time flightTime;
 	    private int noOfSeats;
+	    private double price;
 	    
 	    
 		public int getId() {
@@ -94,6 +95,12 @@ public abstract class FlightEntity implements Comparable<FlightEntity> {
 					return 1;
 				}
 			}
+		}
+		public double getPrice() {
+			return price;
+		}
+		public void setPrice(double price) {
+			this.price = price;
 		}
 	    
 }

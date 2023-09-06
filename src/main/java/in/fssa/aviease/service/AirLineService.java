@@ -31,7 +31,6 @@ public class AirLineService {
 		
 		try {
 			AirLineValidator.validateAirLine(airLine);
-			AirLineValidator.idValidator(airLine.getId());
 			airLineDAO.create(airLine);
 		} catch (PersistenceException e) {
 			throw new ServiceException(e.getMessage());
