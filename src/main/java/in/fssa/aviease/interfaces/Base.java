@@ -3,8 +3,8 @@ package in.fssa.aviease.interfaces;
 
 import java.util.List;
 
+
 import in.fssa.aviease.exception.PersistenceException;
-import in.fssa.aviease.model.Price;
 
 public interface Base<T> {
 

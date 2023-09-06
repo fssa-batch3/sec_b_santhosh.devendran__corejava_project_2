@@ -1,7 +1,6 @@
 package in.fssa.aviease.util;
 
 import java.sql.Connection;
-
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,7 +32,7 @@ public class ConnectionUtil {
 //    		userName ="root";
 //    		 passWord ="123456";
     		
-        
+       
 		
 		
 		Connection connection = null;

@@ -1,7 +1,6 @@
 package in.fssa.aviease.validator;
 
 import java.time.LocalDate;
-
 import in.fssa.aviease.dao.FlightDAO;
 import in.fssa.aviease.dao.PriceDAO;
 import in.fssa.aviease.exception.PersistenceException;

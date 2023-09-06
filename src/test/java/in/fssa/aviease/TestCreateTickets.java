@@ -1,17 +1,15 @@
 package in.fssa.aviease;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 import org.junit.jupiter.api.Test;
 
 import in.fssa.aviease.exception.ValidationException;
 import in.fssa.aviease.model.Tickets;
-import in.fssa.aviease.model.TicketsEntity;
 import in.fssa.aviease.service.TicketsService;
 
 public class TestCreateTickets {
@@ -35,7 +33,7 @@ public class TestCreateTickets {
 
 	    @Test
 	    public void testCreateTicketWithNullObject() {
-	    	Tickets ticket = new Tickets();
+	    
 	    	 TicketsService ts=new TicketsService();
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	            ts.create(null);

@@ -1,8 +1,6 @@
 package in.fssa.aviease.validator;
 
 import java.util.regex.Matcher;
-
-
 import java.util.regex.Pattern;
 
 import in.fssa.aviease.dao.UserDAO;
@@ -30,6 +28,7 @@ public class UserValidator {
 		StringUtil.rejectIfInvalidString(newUser.getLastname(), "Lastname");
 	}
 	
+
 	/**
      * Validates a string value.
      *
@@ -160,13 +159,13 @@ public class UserValidator {
      */
 	public static void emailValidate(String email) throws ValidationException {
 		
-		StringUtil.rejectIfInvalidString(email, "Email");
-
-		String EMAIL_PATTERN = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-
-		Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-		Matcher matcher = pattern.matcher(email);
-		if (!matcher.matches()) {
+		 String EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+	        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+	        Matcher matcher = pattern.matcher(email);
+	        boolean match= matcher.matches();
+	        
+		if (match == false) {
+			System.out.println("email");
 			throw new ValidationException("Invalid email format");
 		}	
 

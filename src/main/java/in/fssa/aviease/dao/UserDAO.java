@@ -43,7 +43,6 @@ public class UserDAO implements UserInterface{
 			}
 
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
 			throw new PersistenceException(e.getMessage());
 		} finally {
 			ConnectionUtil.close(con, ps, rs);
@@ -79,7 +78,6 @@ public class UserDAO implements UserInterface{
 			if (e.getMessage().contains("Duplicate entry")) {
 				throw new RuntimeException("Duplicate constraint");
 			} else {
-				System.out.println(e.getMessage());
 				throw new PersistenceException(e.getMessage());
 			}
 		} finally {
@@ -110,7 +108,6 @@ public class UserDAO implements UserInterface{
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println(e.getMessage());
 			throw new PersistenceException(e.getMessage());
 		} finally {
 			ConnectionUtil.close(con, ps);
@@ -121,7 +118,6 @@ public class UserDAO implements UserInterface{
 	
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
 		
 	}
 	
@@ -193,7 +189,6 @@ public class UserDAO implements UserInterface{
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println(e.getMessage());
 			throw new PersistenceException(e.getMessage());
 		} finally {
 			ConnectionUtil.close(con, ps, rs);
@@ -229,7 +224,6 @@ public class UserDAO implements UserInterface{
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println(e.getMessage());
 			throw new PersistenceException(e.getMessage());
 		} finally {
 			ConnectionUtil.close(con, ps, rs);
@@ -245,7 +239,7 @@ public class UserDAO implements UserInterface{
 		ResultSet rs = null;
 		int count = 0;
 
-		//List<User> userList = new ArrayList<User>();
+		
 		try {
 			String query = "SELECT * FROM users";
 			con = ConnectionUtil.getConnection();

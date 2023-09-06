@@ -1,7 +1,6 @@
 package in.fssa.aviease.util;
 
 import java.time.LocalDate;
-
 import in.fssa.aviease.exception.ValidationException;
 
 public class StringUtil {

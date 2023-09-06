@@ -29,6 +29,7 @@ public class TestUpdateUser {
  	        newUser.setEmail("sandy1@gmail.com");
  	        newUser.setPassword("Azxcv@123");
         	
+ 	        
             userService.updateUser(nonExistingUserId,newUser );
         });
         String expectedMessage = "Invalid user id";

@@ -15,6 +15,8 @@ import in.fssa.aviease.util.ConnectionUtil;
 
 public class AirLineDAO implements AirLineInterface{
 
+	private String airCode="airline_code";
+	private String airName="airline_name";
 	@Override
 	public List<AirLine> findAll() throws PersistenceException {
 		Connection con = null;
@@ -33,14 +35,13 @@ public class AirLineDAO implements AirLineInterface{
 				AirLine airLine=new AirLine();
 				
 				airLine.setId(rs.getInt("id"));
-				airLine.setAirLineCode(rs.getString("airline_code"));
-				airLine.setAirLineName(rs.getString("airline_name"));
+				airLine.setAirLineCode(rs.getString(airCode));
+				airLine.setAirLineName(rs.getString(airName));
 				
 				airLineList.add(airLine);
 			}
 
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
 			throw new PersistenceException(e.getMessage());
 		} finally {
 			ConnectionUtil.close(con, ps, rs);
@@ -64,7 +65,6 @@ public class AirLineDAO implements AirLineInterface{
 		            ps.executeUpdate();
 		        } catch (SQLException e) {
 		        	e.printStackTrace();
-					System.out.println(e.getMessage());
 					throw new PersistenceException(e.getMessage());
 		        } finally {
 		            ConnectionUtil.close(con, ps);
@@ -91,18 +91,14 @@ public class AirLineDAO implements AirLineInterface{
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println(e.getMessage());
 			throw new PersistenceException(e.getMessage());
 		} finally {
 			ConnectionUtil.close(con, ps);
 		}
 	}
 
-	@Override
-	public void delete(int id) throws PersistenceException {
-
-		
-	}
+	
+	
 
 	@Override
 	public AirLine findById(int id) throws PersistenceException {
@@ -121,12 +117,11 @@ public class AirLineDAO implements AirLineInterface{
 
 		    while (rs.next()) {
 		        airLine.setId(rs.getInt("id"));
-		        airLine.setAirLineCode(rs.getString("airline_code"));
-		        airLine.setAirLineName(rs.getString("airline_name"));
+		        airLine.setAirLineCode(rs.getString(airCode));
+		        airLine.setAirLineName(rs.getString(airName));
 		    }
 
 		} catch (SQLException e) {
-		    System.out.println(e.getMessage());
 		    throw new PersistenceException(e.getMessage());
 		} finally {
 		    ConnectionUtil.close(con, ps, rs);
@@ -155,20 +150,25 @@ public class AirLineDAO implements AirLineInterface{
 				
 				
 				airLine.setId(rs.getInt("id"));
-				airLine.setAirLineCode(rs.getString("airline_code"));
-				airLine.setAirLineName(rs.getString("airline_name"));
+				airLine.setAirLineCode(rs.getString(airCode));
+				airLine.setAirLineName(rs.getString(airName));
 				
 				
 			}
 
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
 			throw new PersistenceException(e.getMessage());
 		} finally {
 			ConnectionUtil.close(con, ps, rs);
 		}
 
 		return airLine;
+		
+	}
+
+	@Override
+	public void delete(int id) throws PersistenceException {
+		// TODO Auto-generated method stub
 		
 	}
 	

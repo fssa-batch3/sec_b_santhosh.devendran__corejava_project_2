@@ -1,7 +1,6 @@
 package in.fssa.aviease.validator;
 
 import java.sql.Time;
-
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,6 +24,10 @@ public class FlightValidator {
 			
 			throw new ValidationException("flight can not be null");
 		}
+		
+		if(flight.getPrice()<1.0) {
+			throw new ValidationException("price can not be 0 or negative");
+		}
 
 		StringUtil.rejectIfInvalidString(flight.getSrc(), "source");
 		StringUtil.rejectIfInvalidString(flight.getDestination(), "destination");
@@ -35,6 +38,7 @@ public class FlightValidator {
 		flightNoNotExist(flight.getFlightNo());
 		
 	}
+	
 
 	/**
      * Validates an integer value.
@@ -151,6 +155,15 @@ public class FlightValidator {
 
 		if (check == null) {
 			throw new ValidationException("flight already not exist");
+
+		}
+
+	}
+	
+	public static void flightprice(double price) throws ValidationException {
+
+		if (price < 1.0) {
+			throw new ValidationException("price can not be 0 or negative");
 
 		}
 

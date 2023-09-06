@@ -1,6 +1,7 @@
 package in.fssa.aviease;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ public class TestUpdateFlight {
 	 	       flight.setPrice(299.00);
 	 	       flight.setNoOfSeats(330);
 	 	       
-	 	      flightService.updateFlight(82,flight);
+	 	      flightService.updateFlight(2004,flight);
 	        });
 	        String expectedMessage = "flight already not exist";
 	        String actualMessage = exception.getMessage();
@@ -35,3 +36,4 @@ public class TestUpdateFlight {
 	    }
 	    
 }
+

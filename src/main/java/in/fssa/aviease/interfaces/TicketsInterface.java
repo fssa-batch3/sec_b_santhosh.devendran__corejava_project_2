@@ -1,10 +1,10 @@
 package in.fssa.aviease.interfaces;
 
 import java.time.LocalDate;
+
 import java.util.List;
 
 import in.fssa.aviease.exception.PersistenceException;
-import in.fssa.aviease.exception.ValidationException;
 import in.fssa.aviease.model.Tickets;
 
 public interface TicketsInterface extends Base<Tickets>{

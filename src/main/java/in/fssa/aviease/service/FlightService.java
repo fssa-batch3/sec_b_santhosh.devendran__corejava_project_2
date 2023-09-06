@@ -1,8 +1,6 @@
 package in.fssa.aviease.service;
 
 import java.sql.Time;
-
-
 import java.util.List;
 
 import in.fssa.aviease.model.Flight;
@@ -17,7 +15,6 @@ public class FlightService {
 	
 	FlightDAO flightDAO = new FlightDAO();
 	
-
 	/**
      * Retrieves a list of all flights.
      *
@@ -68,6 +65,7 @@ public class FlightService {
 		try {
 			FlightValidator.flightIdExist(id);
 			FlightValidator.validateFlight(t);
+			FlightValidator.flightprice(t.getPrice());
 			flightDAO.update(id, t);
 		} catch (PersistenceException e) {
 			throw new ServiceException(e.getMessage());

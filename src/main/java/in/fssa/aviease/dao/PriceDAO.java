@@ -1,6 +1,7 @@
 package in.fssa.aviease.dao;
 
 import java.math.BigDecimal;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -9,11 +10,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.mysql.cj.xdevapi.Result;
-
 import in.fssa.aviease.exception.PersistenceException;
-import in.fssa.aviease.exception.ValidationException;
 import in.fssa.aviease.interfaces.PriceInterface;
 import in.fssa.aviease.model.Price;
 import in.fssa.aviease.util.ConnectionUtil;
@@ -50,6 +47,7 @@ public class PriceDAO implements PriceInterface{
 
 	    return priceList;
 	}
+	
 
 
 	@Override
@@ -105,7 +103,6 @@ public class PriceDAO implements PriceInterface{
 
 	@Override
 	public void delete(int id) throws PersistenceException {
-		// TODO Auto-generated method stub
 		
 	}
 

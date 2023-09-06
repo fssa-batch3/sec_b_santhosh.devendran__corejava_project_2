@@ -1,6 +1,7 @@
 package in.fssa.aviease.dao;
 
 import java.sql.Connection;
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.fssa.aviease.exception.PersistenceException;
-import in.fssa.aviease.exception.ValidationException;
 import in.fssa.aviease.interfaces.TicketsInterface;
 import in.fssa.aviease.model.Tickets;
 import in.fssa.aviease.util.ConnectionUtil;
@@ -29,6 +29,7 @@ public class TicketsDAO implements TicketsInterface{
 	            con = ConnectionUtil.getConnection();
 	            ps = con.prepareStatement(query);
 	            rs = ps.executeQuery();
+	            
 
 	            while (rs.next()) {
 	                Tickets ticket = new Tickets();
@@ -60,7 +61,6 @@ public class TicketsDAO implements TicketsInterface{
 	            
 	            ps.setInt(1, ticket.getUserId());
 	            ps.setInt(2, ticket.getFlightId());
-	       //     ps.setInt(3, ticket.getPriceId());
 	            ps.setDate(3, Date.valueOf(ticket.getTravelDate()));	            
 	            ps.executeUpdate();
 	        } catch (SQLException e) {
@@ -72,13 +72,11 @@ public class TicketsDAO implements TicketsInterface{
 
 	@Override
 	public void update(int id, Tickets t) throws PersistenceException {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void delete(int id) throws PersistenceException {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -102,9 +100,8 @@ public class TicketsDAO implements TicketsInterface{
 	                ticket.setId(rs.getInt("id"));
 	                ticket.setUserId(rs.getInt("user_id"));
 	                ticket.setFlightId(rs.getInt("flight_id"));
-	              //  ticket.setPriceId(rs.getInt("price_id"));
 	                ticket.setTravelDate(rs.getDate("travel_date").toLocalDate());
-	                // Set other attributes if needed
+	               
 	            }
 	        } catch (SQLException e) {
 	            throw new PersistenceException(e.getMessage());
@@ -135,7 +132,6 @@ public class TicketsDAO implements TicketsInterface{
 	                ticket.setId(rs.getInt("id"));
 	                ticket.setFlightId(rs.getInt("flight_id"));
 	                ticket.setBooked(rs.getTimestamp("created_at").toLocalDateTime());
-	             //   ticket.setPriceId(rs.getInt("price_id"));
 	                ticket.setTravelDate(rs.getDate("travel_date").toLocalDate());
 	                ticketsList.add(ticket);
 	            }
@@ -168,7 +164,6 @@ public class TicketsDAO implements TicketsInterface{
 	                ticket.setId(rs.getInt("id"));
 	                ticket.setFlightId(rs.getInt("flight_id"));
 	                ticket.setBooked(rs.getTimestamp("created_at").toLocalDateTime());
-	              //  ticket.setPriceId(rs.getInt("price_id"));
 	                ticket.setTravelDate(rs.getDate("travel_date").toLocalDate());
 	                ticketsList.add(ticket);
 	            }
@@ -201,7 +196,6 @@ public class TicketsDAO implements TicketsInterface{
 	                ticket.setId(rs.getInt("id"));
 	                ticket.setUserId(rs.getInt("user_id"));
 	                ticket.setBooked(rs.getTimestamp("created_at").toLocalDateTime());
-	                //ticket.setPriceId(rs.getInt("price_id"));
 	                ticket.setTravelDate(rs.getDate("travel_date").toLocalDate());
 	                ticketsList.add(ticket);
 	            }
@@ -279,7 +273,6 @@ public class TicketsDAO implements TicketsInterface{
 	            ticket.setFlightId(rs.getInt("flight_id"));
 	            ticket.setBooked(rs.getTimestamp("created_at").toLocalDateTime());
 	            ticket.setTravelDate(rs.getDate("travel_date").toLocalDate());
-	            //ticket.setPriceId(rs.getInt("price_id"));
 	            
 	            listOfTickets.add(ticket);
 	        }

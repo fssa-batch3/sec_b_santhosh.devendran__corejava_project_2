@@ -1,6 +1,5 @@
 package in.fssa.aviease.model;
 
-import java.time.LocalDate;
 
 public class Tickets extends TicketsEntity{
 

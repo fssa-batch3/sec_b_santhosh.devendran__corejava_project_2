@@ -1,7 +1,5 @@
 package in.fssa.aviease.validator;
 
-import java.time.LocalDate;
-
 import in.fssa.aviease.exception.ValidationException;
 import in.fssa.aviease.model.Tickets;
 

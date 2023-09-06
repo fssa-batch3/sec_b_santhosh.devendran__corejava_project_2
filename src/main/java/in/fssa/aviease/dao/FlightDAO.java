@@ -24,6 +24,7 @@ public class FlightDAO implements FlightInterface {
 		List<Flight> FlightList = new ArrayList<>();
 		ResultSet rs = null;
 
+		
 		try {
 			String query = "SELECT id, src, destination, airline_code, flight_no, flight_status, flight_time, no_of_seats,price FROM flights ";
 			con = ConnectionUtil.getConnection();
@@ -105,7 +106,6 @@ public class FlightDAO implements FlightInterface {
 	        ps.setString(2, newFlight.getDestination());
 	        ps.setString(3, newFlight.getAirlineCode());
 	        ps.setString(4, newFlight.getFlightNo());
-	       // ps.setInt(5, newFlight.getDayId());
 	        ps.setBoolean(5, newFlight.isFlightStatus());
 	        ps.setTime(6, newFlight.getFlightTime());
 	        ps.setInt(7, newFlight.getNoOfSeats());
@@ -114,11 +114,9 @@ public class FlightDAO implements FlightInterface {
 
 	        ps.executeUpdate();
 
-	        System.out.println("Flight Successfully Updated :)");
-
+	   
 	    } catch (SQLException e) {
 	        e.printStackTrace();
-	        System.out.println(e.getMessage());
 	        throw new PersistenceException(e.getMessage());
 	    } finally {
 	        ConnectionUtil.close(con, ps);
@@ -143,7 +141,6 @@ public class FlightDAO implements FlightInterface {
 
 		    } catch (SQLException e) {
 		        e.printStackTrace();
-		        System.out.println(e.getMessage());
 		        throw new PersistenceException(e.getMessage());
 		    } finally {
 		        ConnectionUtil.close(con, ps);
@@ -172,7 +169,6 @@ public class FlightDAO implements FlightInterface {
 		            flight.setDestination(rs.getString("destination"));
 		            flight.setAirlineCode(rs.getString("airline_code"));
 		            flight.setFlightNo(rs.getString("flight_no"));
-		           // flight.setDayId(rs.getInt("day_id"));
 		            flight.setFlightStatus(rs.getBoolean("flight_status"));
 		            flight.setFlightTime(rs.getTime("flight_time"));
 		            flight.setNoOfSeats(rs.getInt("no_of_seats"));
@@ -180,7 +176,6 @@ public class FlightDAO implements FlightInterface {
 		        }
 
 		    } catch (SQLException e) {
-		        System.out.println(e.getMessage());
 		        throw new PersistenceException(e.getMessage());
 		    } finally {
 		        ConnectionUtil.close(con, ps, rs);
@@ -212,7 +207,6 @@ public class FlightDAO implements FlightInterface {
 		            flight.setDestination(rs.getString("destination"));
 		            flight.setAirlineCode(rs.getString("airline_code"));
 		            flight.setFlightNo(rs.getString("flight_no"));
-		           // flight.setDayId(rs.getInt("day_id"));
 		            flight.setFlightStatus(rs.getBoolean("flight_status"));
 		            flight.setFlightTime(rs.getTime("flight_time"));
 		            flight.setNoOfSeats(rs.getInt("no_of_seats"));
@@ -221,7 +215,6 @@ public class FlightDAO implements FlightInterface {
 		        }
 
 		    } catch (SQLException e) {
-		        System.out.println(e.getMessage());
 		        throw new PersistenceException(e.getMessage());
 		    } finally {
 		        ConnectionUtil.close(con, ps, rs);
@@ -252,7 +245,6 @@ public class FlightDAO implements FlightInterface {
 				flight.setDestination(rs.getString("destination"));
 				flight.setAirlineCode(rs.getString("airline_code"));
 				flight.setFlightNo(rs.getString("flight_no"));
-				//flight.setDayId(rs.getInt("day_id"));
 				flight.setFlightStatus(rs.getBoolean("flight_status"));
 				flight.setFlightTime(rs.getTime("flight_time"));
 				flight.setNoOfSeats(rs.getInt("no_of_seats"));
@@ -262,7 +254,6 @@ public class FlightDAO implements FlightInterface {
 			}
 
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
 			throw new PersistenceException(e.getMessage());
 		} finally {
 			ConnectionUtil.close(con, ps, rs);
@@ -293,7 +284,6 @@ public class FlightDAO implements FlightInterface {
 		            flight.setDestination(rs.getString("destination"));
 		            flight.setAirlineCode(rs.getString("airline_code"));
 		            flight.setFlightNo(rs.getString("flight_no"));
-		           // flight.setDayId(rs.getInt("day_id"));
 		            flight.setFlightStatus(rs.getBoolean("flight_status"));
 		            flight.setFlightTime(rs.getTime("flight_time"));
 		            flight.setNoOfSeats(rs.getInt("no_of_seats"));
@@ -302,7 +292,6 @@ public class FlightDAO implements FlightInterface {
 		        }
 
 		    } catch (SQLException e) {
-		        System.out.println(e.getMessage());
 		        throw new PersistenceException(e.getMessage());
 		    } finally {
 		        ConnectionUtil.close(con, ps, rs);
@@ -342,7 +331,6 @@ public class FlightDAO implements FlightInterface {
 		        }
 
 		    } catch (SQLException e) {
-		        System.out.println(e.getMessage());
 		        throw new PersistenceException(e.getMessage());
 		    } finally {
 		        ConnectionUtil.close(con, ps, rs);
@@ -379,7 +367,6 @@ public class FlightDAO implements FlightInterface {
 		            flight.setDestination(rs.getString("destination"));
 		            flight.setAirlineCode(rs.getString("airline_code"));
 		            flight.setFlightNo(rs.getString("flight_no"));
-		            //flight.setDayId(rs.getInt("day_id"));
 		            flight.setFlightStatus(rs.getBoolean("flight_status"));
 		            flight.setFlightTime(rs.getTime("flight_time"));
 		            flight.setNoOfSeats(rs.getInt("no_of_seats"));
@@ -388,7 +375,6 @@ public class FlightDAO implements FlightInterface {
 		        }
 
 		    } catch (SQLException e) {
-		        System.out.println(e.getMessage());
 		        throw new PersistenceException(e.getMessage());
 		    } finally {
 		        ConnectionUtil.close(con, ps, rs);

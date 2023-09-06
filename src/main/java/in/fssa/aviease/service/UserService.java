@@ -1,8 +1,6 @@
 package in.fssa.aviease.service;
 
 import java.util.List;
-
-
 import in.fssa.aviease.dao.UserDAO;
 import in.fssa.aviease.exception.PersistenceException;
 import in.fssa.aviease.exception.ServiceException;

@@ -1,13 +1,13 @@
 package in.fssa.aviease.dao;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import in.fssa.aviease.exception.PersistenceException;
-import in.fssa.aviease.exception.ValidationException;
 import in.fssa.aviease.interfaces.DaysInterface;
 import in.fssa.aviease.model.Days;
 import in.fssa.aviease.util.ConnectionUtil;
@@ -16,6 +16,9 @@ import java.util.ArrayList;
 
 public class DaysDAO implements DaysInterface{
 
+	private String flight="flight_no";
+	
+	
 	@Override
 	public List<Days> findAll() throws PersistenceException {
 		  Connection con = null;
@@ -32,7 +35,7 @@ public class DaysDAO implements DaysInterface{
 	            while (rs.next()) {
 	                Days day = new Days();
 	                day.setId(rs.getInt("id"));
-	                day.setFlightNo(rs.getString("flight_no"));
+	                day.setFlightNo(rs.getString(flight));
 	                day.setSun(rs.getBoolean("sun"));
 	                day.setMon(rs.getBoolean("mon"));
 	                day.setTue(rs.getBoolean("tue"));
@@ -71,11 +74,8 @@ public class DaysDAO implements DaysInterface{
 
 	            ps.executeUpdate();
 
-	            System.out.println("Days Successfully Created :)");
-
 	        } catch (SQLException e) {
 	            e.printStackTrace();
-	            System.out.println(e.getMessage());
 	            throw new PersistenceException(e.getMessage());
 	        } finally {
 	            ConnectionUtil.close(con, ps);
@@ -102,17 +102,12 @@ public class DaysDAO implements DaysInterface{
 	            ps.setBoolean(8, days.getSat());
 	            ps.setInt(9, id);
 
-	            int rowsUpdated = ps.executeUpdate();
+	            ps.executeUpdate();
 
-	            if (rowsUpdated > 0) {
-	                System.out.println("Days Successfully Updated :)");
-	            } else {
-	                System.out.println("No rows were updated.");
-	            }
+	            
 
 	        } catch (SQLException e) {
 	            e.printStackTrace();
-	            System.out.println(e.getMessage());
 	            throw new PersistenceException(e.getMessage());
 	        } finally {
 	            ConnectionUtil.close(con, ps);
@@ -123,7 +118,6 @@ public class DaysDAO implements DaysInterface{
 
 	@Override
 	public void delete(int id) throws PersistenceException {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -145,7 +139,7 @@ public class DaysDAO implements DaysInterface{
 	            if (rs.next()) {
 	                day = new Days();
 	                day.setId(rs.getInt("id"));
-	                day.setFlightNo(rs.getString("flight_no"));
+	                day.setFlightNo(rs.getString(flight));
 	                day.setSun(rs.getBoolean("sun"));
 	                day.setMon(rs.getBoolean("mon"));
 	                day.setTue(rs.getBoolean("tue"));
@@ -157,7 +151,6 @@ public class DaysDAO implements DaysInterface{
 
 	        } catch (SQLException e) {
 	            e.printStackTrace();
-	            System.out.println(e.getMessage());
 	            throw new PersistenceException(e.getMessage());
 	        } finally {
 	            ConnectionUtil.close(con, ps, rs);
@@ -183,7 +176,7 @@ public class DaysDAO implements DaysInterface{
             if (rs.next()) {
                 day = new Days();
                 day.setId(rs.getInt("id"));
-                day.setFlightNo(rs.getString("flight_no"));
+                day.setFlightNo(rs.getString(flight));
                 day.setSun(rs.getBoolean("sun"));
                 day.setMon(rs.getBoolean("mon"));
                 day.setTue(rs.getBoolean("tue"));
@@ -195,7 +188,6 @@ public class DaysDAO implements DaysInterface{
 
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println(e.getMessage());
             throw new PersistenceException(e.getMessage());
         } finally {
             ConnectionUtil.close(con, ps, rs);

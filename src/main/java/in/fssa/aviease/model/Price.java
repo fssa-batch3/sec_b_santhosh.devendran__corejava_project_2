@@ -1,7 +1,5 @@
 package in.fssa.aviease.model;
 
-import java.util.Date;
-
 public class Price extends PriceEntity{
 	
 	public Price(int id,String startDate,String endDate,String flightId,Double price) {

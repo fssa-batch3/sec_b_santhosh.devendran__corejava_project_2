@@ -1,8 +1,6 @@
 package in.fssa.aviease;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-
-
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -40,14 +38,16 @@ public class TestCreateUser {
 	    
 	    public static long generateRandomLong() {
 	         Random random = new Random();
-	        long min = 6000000000L; // 10-digit minimum value (1000000000)
-	        long max = 9999999999L; // 10-digit maximum value (9999999999)
+	        long min = 6000000000L; 
+	        long max = 9999999999L; 
 	        long range = max - min + 1;
 	        long randomNumber = (long) (random.nextDouble() * range) + min;
 	        return randomNumber;
 	    }
 
 
+	    
+	    
 	    @Test
 	   public void testCreateUserWithValidDataInput() {
 	        User newUser = new User();
