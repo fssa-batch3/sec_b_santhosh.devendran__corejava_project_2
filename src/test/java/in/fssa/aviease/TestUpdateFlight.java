@@ -14,7 +14,7 @@ public class TestUpdateFlight {
 
 	FlightService flightService=new FlightService();
 	 @Test
-	    public void testCreateFlightWithInvalidid() {
+	     void testCreateFlightWithInvalidid() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	Flight flight=new Flight();
 	 	       

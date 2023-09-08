@@ -125,7 +125,7 @@ public class TicketsService {
 		return listOfTickets;
 	}
 
-	public List<Tickets> findByFlightIdTravelDate(int flightId,LocalDate date) throws ServiceException,ValidationException {
+	public List<Tickets> findByFlightIdTravelDate(int flightId,LocalDate date) throws ServiceException {
 		List<Tickets> listOfTickets=new ArrayList<>();
 		TicketsDAO tD=new TicketsDAO();
 		

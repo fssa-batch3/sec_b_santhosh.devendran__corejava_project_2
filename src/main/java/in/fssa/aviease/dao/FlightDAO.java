@@ -201,7 +201,7 @@ public class FlightDAO implements FlightInterface {
 		        rs = ps.executeQuery();
 
 		        if (rs.next()) {
-		           
+		           flight =new Flight();
 		            flight.setId(rs.getInt("id"));
 		            flight.setSrc(rs.getString("src"));
 		            flight.setDestination(rs.getString("destination"));

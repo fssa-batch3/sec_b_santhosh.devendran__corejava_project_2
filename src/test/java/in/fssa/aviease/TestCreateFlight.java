@@ -19,12 +19,12 @@ public class TestCreateFlight {
 	
 	 public static String generateRandom4DigitString() {
 	        Random random = new Random();
-	        int randomNumber = random.nextInt(9000) + 1000; // Generate a number between 1000 and 9999
+	        int randomNumber = random.nextInt(9000) + 1000; 
 	        return Integer.toString(randomNumber);
 	    }
 
 	 @Test
-	   public void testCreateFlightWithValidDataInput() {
+	    void testCreateFlightWithValidDataInput() {
 		 Flight flight=new Flight();
 	       
 	       flight.setSrc("chennai");
@@ -45,7 +45,7 @@ public class TestCreateFlight {
 	    }
 
 	    @Test
-	    public void testCreateFlightWithInvalidData() {
+	     void testCreateFlightWithInvalidData() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	
 	            flightService.createFlight(null);
@@ -56,7 +56,7 @@ public class TestCreateFlight {
 	    }
 	    
 	    @Test
-	    public void testCreateFlightWithInvalidSrc() {
+	     void testCreateFlightWithInvalidSrc() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	Flight flight=new Flight();
 	 	       
@@ -78,7 +78,7 @@ public class TestCreateFlight {
 	    }
 	    
 	    @Test
-	    public void testCreateFlightWithSrcNull() {
+	     void testCreateFlightWithSrcNull() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	Flight flight=new Flight();
 	 	       
@@ -100,7 +100,7 @@ public class TestCreateFlight {
 	    }
 	    
 	    @Test
-	    public void testCreateFlightWithDesNull() {
+	     void testCreateFlightWithDesNull() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	Flight flight=new Flight();
 	 	       
@@ -122,7 +122,7 @@ public class TestCreateFlight {
 	    }
 	    
 	    @Test
-	    public void testCreateFlightWithInvalidDes() {
+	     void testCreateFlightWithInvalidDes() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	Flight flight=new Flight();
 	 	       
@@ -144,7 +144,7 @@ public class TestCreateFlight {
 	    }
 	    
 	    @Test
-	    public void testCreateFlightWithAirLineCodeNull() {
+	     void testCreateFlightWithAirLineCodeNull() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	Flight flight=new Flight();
 	 	       
@@ -166,7 +166,7 @@ public class TestCreateFlight {
 	    }
 	    
 	    @Test
-	    public void testCreateFlightWithInvalidAirLineCodeNull() {
+	     void testCreateFlightWithInvalidAirLineCodeNull() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	Flight flight=new Flight();
 	 	       
@@ -189,7 +189,7 @@ public class TestCreateFlight {
 	    
 	    
 	    @Test
-	    public void testCreateFlightWithFlightNoNull() {
+	     void testCreateFlightWithFlightNoNull() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	Flight flight=new Flight();
 	 	       

@@ -49,7 +49,7 @@ public class TestCreateUser {
 	    
 	    
 	    @Test
-	   public void testCreateUserWithValidDataInput() {
+	    void testCreateUserWithValidDataInput() {
 	        User newUser = new User();
 	        newUser.setFirstname("itachi");
 	        newUser.setLastname("Uchiga");
@@ -66,7 +66,7 @@ public class TestCreateUser {
 	    }
 
 	    @Test
-	    public void testCreateUserWithInvalidData() {
+	     void testCreateUserWithInvalidData() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	
 	            userService.createUser(null);
@@ -77,7 +77,7 @@ public class TestCreateUser {
 	    }
 	    
 	    @Test
-	    public void testCreateUserWithInvalidFname() {
+	     void testCreateUserWithInvalidFname() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	
 	        	User newUser = new User();
@@ -94,7 +94,7 @@ public class TestCreateUser {
 	    }
 	    
 	    @Test
-	    public void testCreateUserWithInvalidMobileNo() {
+	     void testCreateUserWithInvalidMobileNo() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	
 	        	User newUser = new User();
@@ -116,7 +116,7 @@ public class TestCreateUser {
 	    
 	   
 	    @Test
-	    public void testCreateUserWithAlreadyExistMobileNo() {
+	     void testCreateUserWithAlreadyExistMobileNo() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	
 	        	User newUser = new User();
@@ -134,7 +134,7 @@ public class TestCreateUser {
 	    }
 	    
 	    @Test
-	    public void testCreateUserWithInvalidFnameNull() {
+	     void testCreateUserWithInvalidFnameNull() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	
 	        	User newUser = new User();
@@ -150,7 +150,7 @@ public class TestCreateUser {
 	        assertTrue(expectedMessage.equals(actualMessage));
 	    }
 	    @Test
-	    public void testCreateUserWithInvalidLname() {
+	     void testCreateUserWithInvalidLname() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	
 	        	User newUser = new User();
@@ -167,7 +167,7 @@ public class TestCreateUser {
 	    }
 	    
 	    @Test
-	    public void testCreateUserWithInvalidLnameNull() {
+	     void testCreateUserWithInvalidLnameNull() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	
 	        	User newUser = new User();
@@ -184,7 +184,7 @@ public class TestCreateUser {
 	    }
 	    
 	    @Test
-	    public void testCreateUserWithInvalidemail() {
+	     void testCreateUserWithInvalidemail() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	
 	        	User newUser = new User();
@@ -201,7 +201,7 @@ public class TestCreateUser {
 	    }
 	    
 	    @Test
-	    public void testCreateUserWithInvalidemailNull() {
+	     void testCreateUserWithInvalidemailNull() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	
 	        	User newUser = new User();
@@ -218,7 +218,7 @@ public class TestCreateUser {
 	    }
 	    
 	    @Test
-	    public void testCreateUserWithInvalidemailPattern() {
+	     void testCreateUserWithInvalidemailPattern() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	
 	        	User newUser = new User();
@@ -235,7 +235,7 @@ public class TestCreateUser {
 	    }
 	    
 	    @Test
-	    public void testCreateUserWithInvalidPassword() {
+	     void testCreateUserWithInvalidPassword() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	
 	        	User newUser = new User();
@@ -252,7 +252,7 @@ public class TestCreateUser {
 	    }
 	    
 	    @Test
-	    public void testCreateUserWithInvalidPasswordNull() {
+	     void testCreateUserWithInvalidPasswordNull() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	
 	        	User newUser = new User();
@@ -269,7 +269,7 @@ public class TestCreateUser {
 	    }
 	    
 	    @Test
-	    public void testCreateUserWithInvalidPasswordPatern() {
+	     void testCreateUserWithInvalidPasswordPatern() {
 	        Exception exception = assertThrows(ValidationException.class, () -> {
 	        	
 	        	User newUser = new User();

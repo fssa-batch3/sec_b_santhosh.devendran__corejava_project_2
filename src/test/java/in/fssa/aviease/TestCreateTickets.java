@@ -15,7 +15,7 @@ import in.fssa.aviease.service.TicketsService;
 public class TestCreateTickets {
 	
 	 @Test
-	    public void testCreateTicketWithValidInput() {
+	     void testCreateTicketWithValidInput() {
 	        Tickets ticket = new Tickets();
 	        ticket.setId(1);
 	        ticket.setUserId(2);
@@ -32,7 +32,7 @@ public class TestCreateTickets {
 	    }
 
 	    @Test
-	    public void testCreateTicketWithNullObject() {
+	     void testCreateTicketWithNullObject() {
 	    
 	    	 TicketsService ts=new TicketsService();
 	        Exception exception = assertThrows(ValidationException.class, () -> {

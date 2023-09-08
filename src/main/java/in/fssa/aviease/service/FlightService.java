@@ -42,6 +42,7 @@ public class FlightService {
 		
 		try {
 			FlightValidator.validateFlight(t);
+			FlightValidator.flightNoNotExist(t.getFlightNo());
 			flightDAO.create(t);
 		} catch (PersistenceException e) {
 			

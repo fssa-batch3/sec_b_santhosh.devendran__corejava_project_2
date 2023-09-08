@@ -35,7 +35,7 @@ public class FlightValidator {
 		StringUtil.rejectIfInvalidString(flight.getFlightNo(), "flight number");
 		validateInt(flight.getNoOfSeats(), "seats");
 		isValidSqlTimeFormat(flight.getFlightTime());
-		flightNoNotExist(flight.getFlightNo());
+		
 		
 	}
 	

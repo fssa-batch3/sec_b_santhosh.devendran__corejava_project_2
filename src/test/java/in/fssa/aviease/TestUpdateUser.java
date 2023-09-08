@@ -14,7 +14,7 @@ public class TestUpdateUser {
 
 	UserService userService=new UserService();
 	@Test
-	public void testUpdateUserWithInvalidId() {
+	 void testUpdateUserWithInvalidId() {
         int nonExistingUserId = -1;
         User updatedUser = new User();
         updatedUser.setFirstname("sandy");
@@ -39,7 +39,7 @@ public class TestUpdateUser {
 	
 	
 	@Test
-	public void testUpdateUserWithNotExistId() {
+	 void testUpdateUserWithNotExistId() {
         int nonExistingUserId = 34;
         User updatedUser = new User();
         updatedUser.setFirstname("sandy");
@@ -65,7 +65,7 @@ public class TestUpdateUser {
 
 
     @Test
-    public void testUpdateUser() {
+     void testUpdateUser() {
         int existingUserId = 1; 
         User updatedUser = new User();
         updatedUser.setFirstname("john");

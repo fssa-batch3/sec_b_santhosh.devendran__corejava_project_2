@@ -91,13 +91,14 @@ public class UserService {
      * @throws ServiceException 
      * @throws ValidationException If validation of the ID fails.
      */
-	public User findUserById(int i) throws ServiceException ,ValidationException{
+	public User findUserById(int id) throws ServiceException ,ValidationException{
 		
 		try {
-			UserValidator.idValidate(i);
-			UserValidator.checkExistid(i);
+			
+			UserValidator.idValidate(id);
+			UserValidator.checkExistid(id);
 
-			return userDAO.findById(i);
+			return userDAO.findById(id);
 		} catch (PersistenceException e) {
 			throw new ServiceException(e.getMessage());
 		}

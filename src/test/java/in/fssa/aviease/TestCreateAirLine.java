@@ -31,7 +31,7 @@ public class TestCreateAirLine {
     }
 
     @Test
-    public void testValidateAirLineValidAirLine() {
+     void testValidateAirLineValidAirLine() {
     	String randomString = generateRandomString(5);
     	String randomString1 = generateRandomString(10);
         AirLine airLine = new AirLine(3,randomString, randomString1);
@@ -39,13 +39,13 @@ public class TestCreateAirLine {
     }
 
     @Test
-    public void testValidateAirLineNullAirLine() {
+     void testValidateAirLineNullAirLine() {
         ValidationException exception = assertThrows(ValidationException.class, () -> AirLineValidator.validateAirLine(null));
         assertTrue(exception.getMessage().contains("invalid airline input"));
     }
 
     @Test
-    public void testValidateAirLineInvalidAirLineCode() {
+     void testValidateAirLineInvalidAirLineCode() {
     	String randomString = generateRandomString(5);
         AirLine airLine = new AirLine(1,"", randomString);
         ValidationException exception = assertThrows(ValidationException.class, () -> AirLineValidator.validateAirLine(airLine));
@@ -53,7 +53,7 @@ public class TestCreateAirLine {
     }
 
     @Test
-    public void testValidateAirLineInvalidAirLineName() {
+     void testValidateAirLineInvalidAirLineName() {
     	String randomString = generateRandomString(5);
         AirLine airLine = new AirLine(4,randomString,"");
         ValidationException exception = assertThrows(ValidationException.class, () -> AirLineValidator.validateAirLine(airLine));

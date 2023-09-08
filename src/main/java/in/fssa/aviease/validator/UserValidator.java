@@ -159,13 +159,12 @@ public class UserValidator {
      */
 	public static void emailValidate(String email) throws ValidationException {
 		
-		 String EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-	        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+		 String EMAILPATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+	        Pattern pattern = Pattern.compile(EMAILPATTERN);
 	        Matcher matcher = pattern.matcher(email);
 	        boolean match= matcher.matches();
 	        
 		if (match == false) {
-			System.out.println("email");
 			throw new ValidationException("Invalid email format");
 		}	
 
@@ -180,9 +179,9 @@ public class UserValidator {
 	  public static void passwordValidate(String password) throws ValidationException {
 	        StringUtil.rejectIfInvalidString(password, "Password");
 
-	        String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+	        String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
 
-	        Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
+	        Pattern pattern = Pattern.compile(passwordPattern);
 	        Matcher matcher = pattern.matcher(password);
 	        if (!matcher.matches()) {
 	            throw new ValidationException("Invalid password format");
