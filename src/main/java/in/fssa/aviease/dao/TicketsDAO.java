@@ -25,7 +25,7 @@ public class TicketsDAO implements TicketsInterface{
 	        List<Tickets> ticketsList = new ArrayList<>();
 
 	        try {
-	            String query = "SELECT id, user_id, flight_id, created_at, travel_date FROM tickets";
+	            String query = "SELECT id, user_id, flight_id, created_at, travel_date,is_active FROM tickets";
 	            con = ConnectionUtil.getConnection();
 	            ps = con.prepareStatement(query);
 	            rs = ps.executeQuery();
@@ -38,6 +38,7 @@ public class TicketsDAO implements TicketsInterface{
 	                ticket.setFlightId(rs.getInt("flight_id"));
 	                ticket.setBooked(rs.getTimestamp("created_at").toLocalDateTime());
 	                ticket.setTravelDate(rs.getDate("travel_date").toLocalDate());
+	                ticket.setActive(rs.getBoolean("is_active"));
 	                ticketsList.add(ticket);
 	            }
 	        } catch (SQLException e) {
@@ -55,13 +56,14 @@ public class TicketsDAO implements TicketsInterface{
 	        PreparedStatement ps = null;
 
 	        try {
-	            String query = "INSERT INTO tickets (user_id, flight_id, travel_date) VALUES (?, ?, ?)";
+	            String query = "INSERT INTO tickets (user_id, flight_id, travel_date,is_active) VALUES (?, ?, ?,?)";
 	            con = ConnectionUtil.getConnection();
 	            ps = con.prepareStatement(query);
 	            
 	            ps.setInt(1, ticket.getUserId());
 	            ps.setInt(2, ticket.getFlightId());
-	            ps.setDate(3, Date.valueOf(ticket.getTravelDate()));	            
+	            ps.setDate(3, Date.valueOf(ticket.getTravelDate()));
+	            ps.setBoolean(4, true);
 	            ps.executeUpdate();
 	        } catch (SQLException e) {
 	            throw new PersistenceException(e.getMessage());
@@ -77,7 +79,25 @@ public class TicketsDAO implements TicketsInterface{
 
 	@Override
 	public void delete(int id) throws PersistenceException {
-		
+		   Connection con = null;
+		    PreparedStatement ps = null;
+
+		    try {
+		        String query = "UPDATE tickets SET is_active = false WHERE id = ?";
+		        con = ConnectionUtil.getConnection();
+		        ps = con.prepareStatement(query);
+		        ps.setInt(1, id);
+
+		        int rowsAffected = ps.executeUpdate();
+
+		        if (rowsAffected == 0) {
+		            throw new PersistenceException("Ticket with ID " + id + " not found.");
+		        }
+		    } catch (SQLException e) {
+		        throw new PersistenceException(e.getMessage());
+		    } finally {
+		        ConnectionUtil.close(con, ps); 
+		    }
 	}
 
 	@Override
@@ -88,7 +108,7 @@ public class TicketsDAO implements TicketsInterface{
 	        Tickets ticket = null;
 
 	        try {
-	            String query = "SELECT id, user_id, flight_id, created_at, travel_date FROM tickets WHERE id = ?";
+	            String query = "SELECT id, user_id, flight_id, created_at, travel_date,is_active FROM tickets WHERE id = ?";
 	            con = ConnectionUtil.getConnection();
 	            ps = con.prepareStatement(query);
 	            ps.setInt(1, id);
@@ -101,6 +121,7 @@ public class TicketsDAO implements TicketsInterface{
 	                ticket.setUserId(rs.getInt("user_id"));
 	                ticket.setFlightId(rs.getInt("flight_id"));
 	                ticket.setTravelDate(rs.getDate("travel_date").toLocalDate());
+	                ticket.setActive(rs.getBoolean("is_active"));
 	               
 	            }
 	        } catch (SQLException e) {
@@ -120,7 +141,7 @@ public class TicketsDAO implements TicketsInterface{
 	        List<Tickets> ticketsList = new ArrayList<>();
 
 	        try {
-	            String query = "SELECT id, flight_id, created_at, travel_date FROM tickets WHERE user_id = ?";
+	            String query = "SELECT id, flight_id, created_at, travel_date, is_active FROM tickets WHERE user_id = ?";
 	            con = ConnectionUtil.getConnection();
 	            ps = con.prepareStatement(query);
 	            ps.setInt(1, id);
@@ -133,6 +154,7 @@ public class TicketsDAO implements TicketsInterface{
 	                ticket.setFlightId(rs.getInt("flight_id"));
 	                ticket.setBooked(rs.getTimestamp("created_at").toLocalDateTime());
 	                ticket.setTravelDate(rs.getDate("travel_date").toLocalDate());
+	                ticket.setActive(rs.getBoolean("is_active"));
 	                ticketsList.add(ticket);
 	            }
 	        } catch (SQLException e) {
@@ -197,6 +219,8 @@ public class TicketsDAO implements TicketsInterface{
 	                ticket.setUserId(rs.getInt("user_id"));
 	                ticket.setBooked(rs.getTimestamp("created_at").toLocalDateTime());
 	                ticket.setTravelDate(rs.getDate("travel_date").toLocalDate());
+	                ticket.setActive(rs.getBoolean("is_active"));
+	                
 	                ticketsList.add(ticket);
 	            }
 	        } catch (SQLException e) {
@@ -234,6 +258,7 @@ public class TicketsDAO implements TicketsInterface{
 	                ticket.setFlightId(rs.getInt("flight_id"));
 	                ticket.setBooked(rs.getTimestamp("created_at").toLocalDateTime());
 	                ticket.setTravelDate(rs.getDate("travel_date").toLocalDate());
+	                ticket.setActive(rs.getBoolean("is_active"));
 	                ticket.setPriceId(id);
 	                
 	                listOfTickets.add(ticket);
@@ -258,13 +283,14 @@ public class TicketsDAO implements TicketsInterface{
 	    List<Tickets> listOfTickets = new ArrayList<>();
 
 	    try {
-	        String query = "SELECT id, user_id, flight_id, created_at, travel_date FROM tickets WHERE flight_id = ? AND travel_date = ?";
+	        String query = "SELECT id, user_id, flight_id, created_at, travel_date, is_active FROM tickets WHERE flight_id = ? AND travel_date = ? AND is_active = 1";
 	        con = ConnectionUtil.getConnection();
 	        ps = con.prepareStatement(query);
 	        ps.setInt(1, flightId);
 	        ps.setDate(2, java.sql.Date.valueOf(travelDate));
 
 	        rs = ps.executeQuery();
+	      
 
 	        while (rs.next()) {
 	            ticket = new Tickets();
@@ -273,6 +299,7 @@ public class TicketsDAO implements TicketsInterface{
 	            ticket.setFlightId(rs.getInt("flight_id"));
 	            ticket.setBooked(rs.getTimestamp("created_at").toLocalDateTime());
 	            ticket.setTravelDate(rs.getDate("travel_date").toLocalDate());
+	            ticket.setActive(rs.getBoolean("is_active"));
 	            
 	            listOfTickets.add(ticket);
 	        }

@@ -1,6 +1,7 @@
 package in.fssa.aviease.model;
 
 import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -11,8 +12,17 @@ public class TicketsEntity implements Comparable<TicketsEntity>{
 	private int FlightId;
 	private int priceId;
 	private LocalDateTime booked;
-
+	private boolean isActive;
+	private LocalDate travelDate;
 	
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+
 	public LocalDateTime getBooked() {
 		return booked;
 	}
@@ -30,7 +40,6 @@ public class TicketsEntity implements Comparable<TicketsEntity>{
 	}
 
 
-	private LocalDate travelDate;
 	
 	
 	

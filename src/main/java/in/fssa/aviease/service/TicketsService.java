@@ -52,6 +52,14 @@ public class TicketsService {
 	
 	public void delete(int id)throws ServiceException,ValidationException  {
 		
+		TicketsDAO tD=new TicketsDAO();
+		
+		try {
+			tD.delete(id);
+		} catch (PersistenceException e) {
+			e.printStackTrace();
+			throw new ServiceException(e.getMessage());
+		}
 		
 	}
 

@@ -29,9 +29,9 @@ public class ConnectionUtil {
             passWord = System.getenv("DATABASE_PASSWORD");
 //     
 //        	 url ="jdbc:mysql://localhost:3306/aviease";
-//    		userName ="root";
-//    		 passWord ="123456";
-    		
+//        	 userName = "root";
+//        	 passWord = "123456";
+  		
        
 		
 		
