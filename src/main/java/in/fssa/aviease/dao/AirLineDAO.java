@@ -87,7 +87,6 @@ public class AirLineDAO implements AirLineInterface{
 
 			ps.executeUpdate();
 
-			System.out.println("User Successfully Updated :)");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -134,36 +133,32 @@ public class AirLineDAO implements AirLineInterface{
 
 	@Override
 	public AirLine findByAirLineCode(String airLineCode) throws PersistenceException {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		AirLine airLine=new AirLine();
-		
-		try {
-			String query = "SELECT id, airline_name, airline_code FROM airlines Where airline_code=?";
-			con = ConnectionUtil.getConnection();
-			ps = con.prepareStatement(query);
-			ps.setString(1, airLineCode);
-			rs = ps.executeQuery(query);
+	    Connection con = null;
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+	    AirLine airLine = null; 
 
-			while (rs.next()) {
-				
-				
-				airLine.setId(rs.getInt("id"));
-				airLine.setAirLineCode(rs.getString(airCode));
-				airLine.setAirLineName(rs.getString(airName));
-				
-				
-			}
+	    try {
+	        String query = "SELECT id, airline_name, airline_code FROM airlines WHERE airline_code = ? ";
+	        con = ConnectionUtil.getConnection();
+	        ps = con.prepareStatement(query);
+	        ps.setString(1, airLineCode);
+	        rs = ps.executeQuery();
 
-		} catch (SQLException e) {
-			throw new PersistenceException(e.getMessage());
-		} finally {
-			ConnectionUtil.close(con, ps, rs);
-		}
+	        while (rs.next()) {
+	        	airLine=new AirLine();
+	            airLine.setId(rs.getInt("id"));
+	            airLine.setAirLineCode(rs.getString("airline_code"));
+	            airLine.setAirLineName(rs.getString("airline_name"));
+	        }
 
-		return airLine;
-		
+	    } catch (SQLException e) {
+	        throw new PersistenceException(e.getMessage());
+	    } finally {
+	        ConnectionUtil.close(con, ps, rs);
+	    }
+
+	    return airLine;
 	}
 
 	@Override
@@ -172,5 +167,6 @@ public class AirLineDAO implements AirLineInterface{
 		
 	}
 	
+
 
 }

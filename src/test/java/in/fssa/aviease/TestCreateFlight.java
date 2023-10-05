@@ -1,14 +1,10 @@
 package in.fssa.aviease;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.Random;
-
 import org.junit.jupiter.api.Test;
-
 import in.fssa.aviease.exception.ValidationException;
 import in.fssa.aviease.model.Flight;
 import in.fssa.aviease.service.FlightService;

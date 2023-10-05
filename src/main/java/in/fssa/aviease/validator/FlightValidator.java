@@ -160,30 +160,7 @@ public class FlightValidator {
 
 	}
 	
-	public static void flightprice(double price) throws ValidationException {
-
-		if (price < 1.0) {
-			throw new ValidationException("price can not be 0 or negative");
-
-		}
-
-	}
 	
-//	public static void flightAirLineIdExist(String airlineId) throws ValidationException {
-//
-//		AirlineDAO fdao = new AirlineDAO();
-//		Airline check = new Airline();
-//
-//		check = fdao.findByAirLineCode(airlineId);
-//
-//		if (check == null) {
-//			throw new ValidationException("flight already not exist");
-//
-//		}
-//
-//	}
-//	
-//	
 	
 
 }

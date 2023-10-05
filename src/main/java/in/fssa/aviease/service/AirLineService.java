@@ -30,6 +30,7 @@ public class AirLineService {
 		
 		try {
 			AirLineValidator.validateAirLine(airLine);
+			AirLineValidator.airLineCodeNotExists(airLine.getAirLineCode());
 			airLineDAO.create(airLine);
 		} catch (PersistenceException e) {
 			throw new ServiceException(e.getMessage());
@@ -43,25 +44,11 @@ public class AirLineService {
 		try {
 			AirLineValidator.idValidator(id);
 			AirLineValidator.validateAirLine(airLine);
+			AirLineValidator.airLineCodeNotExists(airLine.getAirLineCode());
 			airLineDAO.update(id, airLine);
 		} catch (PersistenceException e) {
 			throw new ServiceException(e.getMessage());
 		}
-		
-	}
-
-
-	public void delete(int id)throws ServiceException ,ValidationException{
-		
-		try {
-			AirLineValidator.idValidator(id);
-			AirLineValidator.airLineIdExists(id);
-			airLineDAO.delete(id);
-		} catch (PersistenceException e) {
-			throw new ServiceException(e.getMessage());
-		}
-		
-		
 		
 	}
 

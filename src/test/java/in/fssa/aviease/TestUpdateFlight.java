@@ -28,7 +28,7 @@ public class TestUpdateFlight {
 	 	       flight.setPrice(299.00);
 	 	       flight.setNoOfSeats(330);
 	 	       
-	 	      flightService.updateFlight(2004,flight);
+	 	      flightService.updateFlight(398,flight);
 	        });
 	        String expectedMessage = "flight already not exist";
 	        String actualMessage = exception.getMessage();

@@ -32,8 +32,8 @@ public class AirLineValidator {
 			throw new ValidationException("airline id not exist");
 		}
 		
-		
-	}
+	}	
+	
 	
 	public static void idValidator(int id) throws ValidationException {
 		if(id < 1) {
@@ -62,4 +62,25 @@ public class AirLineValidator {
 		
 		
 	}
+	
+	
+public static void airLineCodeNotExists(String airLineCode) throws ValidationException {
+		
+		
+		AirLineDAO airLineDAO=new AirLineDAO();
+		AirLine airLine=new AirLine();
+		try {
+			airLine = airLineDAO.findByAirLineCode(airLineCode);
+		} catch (PersistenceException e) {
+			throw new ValidationException(e.getMessage());
+		}
+		
+		if(airLine != null) {
+			throw new ValidationException("airline code already exist");
+		}
+		
+		
+	}
+	
+	
 }

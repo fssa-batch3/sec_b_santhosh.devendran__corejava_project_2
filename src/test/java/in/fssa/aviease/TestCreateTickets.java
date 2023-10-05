@@ -18,9 +18,8 @@ public class TestCreateTickets {
 	     void testCreateTicketWithValidInput() {
 	        Tickets ticket = new Tickets();
 	        ticket.setId(1);
-	        ticket.setUserId(2);
+	        ticket.setUserId(1);
 	        ticket.setFlightId(3);
-	    //    ticket.setPriceId(4);
 	       ticket.setTravelDate(LocalDate.of(2023, 9, 25));
 	        
 	        TicketsService ts=new TicketsService();

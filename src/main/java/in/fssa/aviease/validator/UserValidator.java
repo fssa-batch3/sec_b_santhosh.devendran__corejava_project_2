@@ -85,50 +85,9 @@ public class UserValidator {
 		
 	}
 	
-	 /**
-     * Validates the existence of a user with the given email.
-     *
-     * @param email The email to be validated.
-     * @throws ValidationException If a user with the given email does not exist.
-     */
-	public static void checkExistEmail(String email) throws ValidationException {
-		UserDAO userDAO = new UserDAO();
-		User user = new User();
-		
-		try {
-			user = userDAO.findByEmail(email);
-		} catch (PersistenceException e) {
-			throw new ValidationException(e.getMessage());
-		}
-		
-		if(user == null) {
-			throw new ValidationException("user not found");
-		}
-		
-	}
+
 	
-	 /**
-     * Validates the existence of a user with the given mobile number.
-     *
-     * @param mobile The mobile number to be validated.
-     * @throws ValidationException If a user with the given mobile number does not exist.
-     */
-	public static void checkExistMobileNo(long mobile) throws ValidationException {
-		UserDAO userDAO = new UserDAO();
-		User user = new User();
-		
-		try {
-			user = userDAO.findByMobileNo(mobile);
-		} catch (PersistenceException e) {
-			throw new ValidationException(e.getMessage());
-		}
-		
-		if(user == null) {
-			throw new ValidationException("user not found");
-		}
-		
-	}
-	
+
 	/**
      * Validates the existence of a user with the given ID.
      *
@@ -159,6 +118,10 @@ public class UserValidator {
      */
 	public static void emailValidate(String email) throws ValidationException {
 		
+		if(email == null) {
+			throw new ValidationException("Invalid email");
+		}
+		
 		 String EMAILPATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 	        Pattern pattern = Pattern.compile(EMAILPATTERN);
 	        Matcher matcher = pattern.matcher(email);
@@ -188,6 +151,7 @@ public class UserValidator {
 	        }
 	    }
 
+	
 	  /**
 	     * Validates an integer ID.
 	     *

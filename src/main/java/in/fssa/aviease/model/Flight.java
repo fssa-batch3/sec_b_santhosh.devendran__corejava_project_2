@@ -1,6 +1,7 @@
 package in.fssa.aviease.model;
 
 import java.sql.Time;
+import java.util.List;
 
 public class Flight extends FlightEntity{
 	
@@ -26,6 +27,7 @@ public class Flight extends FlightEntity{
 		
 	}
 
+	
 	
 
 

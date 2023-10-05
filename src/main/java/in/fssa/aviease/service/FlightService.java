@@ -30,6 +30,7 @@ public class FlightService {
 		}
 	}
 
+	
 	 /**
      * Creates a new flight.
      *
@@ -66,7 +67,6 @@ public class FlightService {
 		try {
 			FlightValidator.flightIdExist(id);
 			FlightValidator.validateFlight(t);
-			FlightValidator.flightprice(t.getPrice());
 			flightDAO.update(id, t);
 		} catch (PersistenceException e) {
 			throw new ServiceException(e.getMessage());

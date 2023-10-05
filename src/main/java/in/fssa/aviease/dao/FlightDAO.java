@@ -3,6 +3,7 @@ package in.fssa.aviease.dao;
 import java.sql.Connection;
 
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -231,11 +232,11 @@ public class FlightDAO implements FlightInterface {
 		ResultSet rs = null;
 
 		try {
-			String query = "SELECT id, src, destination, airline_code, flight_no, flight_status, flight_time, no_of_seats ,price FROM flights WHERE airline_code = ? AND flight_status = 1";
+			String query = "SELECT id, src, destination, airline_code, flight_no, flight_status, flight_time, no_of_seats, price FROM flights WHERE flight_status = 1 AND airline_code = ?";
 			con = ConnectionUtil.getConnection();
 			ps = con.prepareStatement(query);
 			 ps.setString(1, airLine);
-			rs = ps.executeQuery(query);
+			rs = ps.executeQuery();
 
 			while (rs.next()) {
 

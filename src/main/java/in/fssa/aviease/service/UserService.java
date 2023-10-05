@@ -6,6 +6,7 @@ import in.fssa.aviease.exception.PersistenceException;
 import in.fssa.aviease.exception.ServiceException;
 import in.fssa.aviease.exception.ValidationException;
 import in.fssa.aviease.model.User;
+import in.fssa.aviease.util.PasswordUtil;
 import in.fssa.aviease.validator.UserValidator;
 
 public class UserService {
@@ -29,6 +30,9 @@ public class UserService {
 			UserValidator.checkNotExistMobileNo(user.getMobileNo());
 			UserValidator.checkNotExistEmail(user.getEmail());
 			UserValidator.passwordValidate(user.getPassword());
+			
+			
+			user.setPassword(PasswordUtil.passwordEncrypt(user.getMobileNo(),user.getPassword()));
 			userDAO.create(user);
 		} catch (PersistenceException e) {
 			throw new ServiceException(e.getMessage());
@@ -66,21 +70,7 @@ public class UserService {
 
 	}
 	
-	 /**
-     * Counts the total number of users.
-     *
-     * @return The total number of users.
-	 * @throws ServiceException 
-     */
-	public int count() throws ServiceException {
-		try {
-			return userDAO.count();
-		} catch (PersistenceException e) {
-			throw new ServiceException(e.getMessage());
-		}
 
-	}
-	
 
 
     /**
@@ -160,6 +150,22 @@ public class UserService {
 
 		try {
 			return userDAO.findAll();
+		} catch (PersistenceException e) {
+			throw new ServiceException(e.getMessage());
+		}
+
+	}
+	
+	 /**
+     * Retrieves a list of all users.
+     *
+     * @return A count of all users.
+	 * @throws ServiceException 
+     */
+	public int getCount() throws ServiceException {
+
+		try {
+			return userDAO.count();
 		} catch (PersistenceException e) {
 			throw new ServiceException(e.getMessage());
 		}

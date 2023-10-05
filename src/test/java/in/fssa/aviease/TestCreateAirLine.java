@@ -1,7 +1,8 @@
 package in.fssa.aviease;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -9,8 +10,10 @@ import java.security.SecureRandom;
 
 import org.junit.jupiter.api.Test;
 
+import in.fssa.aviease.exception.ServiceException;
 import in.fssa.aviease.exception.ValidationException;
 import in.fssa.aviease.model.AirLine;
+import in.fssa.aviease.service.AirLineService;
 import in.fssa.aviease.validator.AirLineValidator;
 
 public class TestCreateAirLine {
@@ -30,37 +33,55 @@ public class TestCreateAirLine {
         return stringBuilder.toString();
     }
 
+   
+      
+    AirLineService airLineService = new AirLineService();
+    
+
     @Test
-     void testValidateAirLineValidAirLine() {
-    	String randomString = generateRandomString(5);
-    	String randomString1 = generateRandomString(10);
-        AirLine airLine = new AirLine(3,randomString, randomString1);
-        assertDoesNotThrow(() -> AirLineValidator.validateAirLine(airLine));
+    void testCreateValidAirLine() {
+        String randomString = generateRandomString(5);
+        String randomString1 = generateRandomString(10);
+        AirLine airLine = new AirLine(3, randomString, randomString1);
+        assertDoesNotThrow(() -> airLineService.create(airLine));
+    }
+
+
+
+    @Test
+    void testCreateInvalidAirLine() {
+        // Test creating an invalid AirLine
+        AirLine invalidAirLine = new AirLine(2,"", "InvalidName");
+        ValidationException exception = assertThrows(ValidationException.class, () -> airLineService.create(invalidAirLine));
+        assertTrue(exception.getMessage().contains("Airline code cannot be Null or Empty"));
     }
 
     @Test
-     void testValidateAirLineNullAirLine() {
-        ValidationException exception = assertThrows(ValidationException.class, () -> AirLineValidator.validateAirLine(null));
-        assertTrue(exception.getMessage().contains("invalid airline input"));
+    void testUpdateValidAirLine() {
+        String randomString = generateRandomString(5);
+        AirLine airLine = new AirLine(4, randomString, "UpdatedName");
+        assertDoesNotThrow(() -> airLineService.update(4, airLine));
+    }
+
+
+
+    @Test
+    void testFindByAirLineCode() {
+       
+        String existingCode = "UAE";
+        AirLine foundAirLine = assertDoesNotThrow(() -> airLineService.findByAirLineCode(existingCode));
+        assertNotNull(foundAirLine);
+        assertEquals(existingCode, foundAirLine.getAirLineCode());
     }
 
     @Test
-     void testValidateAirLineInvalidAirLineCode() {
-    	String randomString = generateRandomString(5);
-        AirLine airLine = new AirLine(1,"", randomString);
-        ValidationException exception = assertThrows(ValidationException.class, () -> AirLineValidator.validateAirLine(airLine));
-        assertTrue(exception.getMessage().contains("Airline code"));
+    void testFindByInvalidAirLineCode() {
+        // Test finding an AirLine with an invalid code
+        String invalidCode = null;
+        ValidationException exception = assertThrows(ValidationException.class, () -> airLineService.findByAirLineCode(invalidCode));
+        assertTrue(exception.getMessage().contains("airLine code cannot be Null or Empty"));
     }
 
-    @Test
-     void testValidateAirLineInvalidAirLineName() {
-    	String randomString = generateRandomString(5);
-        AirLine airLine = new AirLine(4,randomString,"");
-        ValidationException exception = assertThrows(ValidationException.class, () -> AirLineValidator.validateAirLine(airLine));
-        assertTrue(exception.getMessage().contains("Airline name"));
-    }
-
- 
-
+    
   
 }

@@ -1,20 +1,36 @@
 package in.fssa.aviease.model;
 
 import java.time.LocalDate;
-
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class TicketsEntity implements Comparable<TicketsEntity>{
+
+	@Override
+	public String toString() {
+		return "[id=" + id + ", UserId=" + UserId + ", FlightId=" + FlightId + ", priceId=" + priceId
+				+ ", booked=" + booked + ", isActive=" + isActive + ", travelDate=" + travelDate + ", seat=" + seat
+				+ "]";
+	}
+
+
 
 	private int id;
 	private int UserId;
 	private int FlightId;
 	private int priceId;
-	private LocalDateTime booked;
+	public LocalDateTime booked;
 	private boolean isActive;
-	private LocalDate travelDate;
+	public LocalDate travelDate;
+	private int seat;
 	
+	public int getSeat() {
+		return seat;
+	}
+
+	public void setSeat(int seat) {
+		this.seat = seat;
+	}
+
 	public boolean isActive() {
 		return isActive;
 	}
@@ -97,14 +113,15 @@ public class TicketsEntity implements Comparable<TicketsEntity>{
 
 
 
-	public void setTravelDate(String travelDate) {
-		
-		String formatPattern = "yyyy-MM-dd"; // Format pattern to match your input
-
-	      DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatPattern);
-	      LocalDate date = LocalDate.parse(travelDate, formatter);
-		this.travelDate = date;
-	}
+	/*
+	 * public void setTravelDate(String travelDate) {
+	 * 
+	 * String formatPattern = "yyyy-MM-dd"; // Format pattern to match your input
+	 * 
+	 * DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatPattern);
+	 * LocalDate date = LocalDate.parse(travelDate, formatter); this.travelDate =
+	 * date; }
+	 */
 
 
 	@Override

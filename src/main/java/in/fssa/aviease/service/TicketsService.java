@@ -44,13 +44,8 @@ public class TicketsService {
 	}
 
 
-	public void update(int id, Tickets t) throws ServiceException,ValidationException  {
-		
-		
-	}
-
 	
-	public void delete(int id)throws ServiceException,ValidationException  {
+	public void delete(int id)throws ServiceException  {
 		
 		TicketsDAO tD=new TicketsDAO();
 		
@@ -120,18 +115,7 @@ public class TicketsService {
 		return listOfTickets;
 	}
 	
-	public List<Tickets> findByPriceId(int id) throws ServiceException,ValidationException {
-		List<Tickets> listOfTickets=new ArrayList<>();
-		TicketsDAO tD=new TicketsDAO();
-		
-		try {
-			listOfTickets=tD.findByPriceId(id);
-		} catch (PersistenceException e) {
-			e.printStackTrace();
-			throw new ServiceException(e.getMessage());
-		}
-		return listOfTickets;
-	}
+
 
 	public List<Tickets> findByFlightIdTravelDate(int flightId,LocalDate date) throws ServiceException {
 		List<Tickets> listOfTickets=new ArrayList<>();
@@ -146,6 +130,18 @@ public class TicketsService {
 		return listOfTickets;
 	}
 	
+	public List<Integer> findSeatByFlightIdTravelDate(int flightId,LocalDate date) throws ServiceException {
+		List<Integer> listOfTickets=new ArrayList<>();
+		TicketsDAO tD=new TicketsDAO();
+		
+		try {
+			listOfTickets=tD.findSeatByFlightIdAndTravelDate(flightId, date);
+		} catch (PersistenceException e) {
+			e.printStackTrace();
+			throw new ServiceException(e.getMessage());
+		}
+		return listOfTickets;
+	}
 	
 
 }
